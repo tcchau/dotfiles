@@ -46,6 +46,7 @@
     Plugin 'vim-airline/vim-airline'
     Plugin 'tpope/vim-sensible'
     Plugin 'vimux'
+    Plugin 'Solarized'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Vundles, please ignore key map error messages"
