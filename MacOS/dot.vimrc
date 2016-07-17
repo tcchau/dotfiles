@@ -44,6 +44,7 @@
     Plugin 'Command-T'
     Plugin 'SuperTab'
     Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
     Plugin 'tpope/vim-sensible'
     Plugin 'vimux'
     Plugin 'Solarized'
@@ -164,7 +165,7 @@ set foldcolumn=2
 " Use syntax folding and manual foldering
 augroup vimrc
   au BufReadPre * setlocal foldmethod=indent
-  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
 augroup END
 " Automatically save and restore folds (tip from the vim wikia)
 autocmd BufWinLeave *.* mkview
@@ -431,3 +432,16 @@ colorscheme solarized
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Settings for CommandT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" these don't seem to work
+" let g:CommandTCancelMap=['<C-c>', '<Esc']
+" nnoremap <silent> <Leader>f <Plug>(CommandT)
+" nnoremap <silent> <Leader>u <Plug>(CommandTBuffer)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Settings for Airline 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd VimEnter * AirlineTheme "solarized dark"
+let g:airline_powerline_fonts = 1
