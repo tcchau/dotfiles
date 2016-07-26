@@ -24,30 +24,33 @@
 " => Setting up Vundle - the vim plugin bundler
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     let iCanHazVundle=1
-    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+    let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
     if !filereadable(vundle_readme) 
         echo "Installing Vundle.."
         echo ""
         silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
+        silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
         let iCanHazVundle=0
     endif
     set nocompatible              " be iMproved, required
     filetype off                  " required
-    set rtp+=~/.vim/bundle/vundle/
+    set rtp+=~/.vim/bundle/Vundle.vim/
     call vundle#begin()
+    " Let vundle manage vundle... mandatory
     Plugin 'VundleVim/Vundle.vim'
+
     "Add your bundles here
     Plugin 'Syntastic' "uber awesome syntax and errors highlighter
     Plugin 'altercation/vim-colors-solarized' "T-H-E colorscheme
     Plugin 'https://github.com/tpope/vim-fugitive' "So awesome, it should be illegal 
-    Plugin 'Command-T'
     Plugin 'SuperTab'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'tpope/vim-sensible'
     Plugin 'vimux'
     Plugin 'Solarized'
+    Plugin 'ack.vim'
+    Plugin 'ctrlp.vim'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Vundles, please ignore key map error messages"
@@ -154,9 +157,9 @@ execute 'set viminfo=%,' . &viminfo
 
 " Save without using escape
 " Works in normal mode
-:map <C-s> :w<kEnter> 
+noremap <C-s> :w<CR>
 " Works in insert mode, saves and puts back in insert mode
-imap <C-s> <Esc>:w<kEnter>i 
+imap <C-s> <Esc>:w<CR>i
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Folds
@@ -165,7 +168,7 @@ set foldcolumn=2
 " Use syntax folding and manual foldering
 augroup vimrc
   au BufReadPre * setlocal foldmethod=indent
-  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
+  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 augroup END
 " Automatically save and restore folds (tip from the vim wikia)
 autocmd BufWinLeave *.* mkview
@@ -435,13 +438,19 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for CommandT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" these don't seem to work
-" let g:CommandTCancelMap=['<C-c>', '<Esc']
+let g:CommandTCancelMap=['<C-c>', '<Esc>']
+let g:CommandTRefreshMap=['<C-f>']
 " nnoremap <silent> <Leader>f <Plug>(CommandT)
 " nnoremap <silent> <Leader>u <Plug>(CommandTBuffer)
+" noremap <Leader>ct :CommandT<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for Airline 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd VimEnter * AirlineTheme "solarized dark"
 let g:airline_powerline_fonts = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Settings for ack.vim 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ackprg = 'ag --nogroup --nocolor --column'
