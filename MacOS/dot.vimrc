@@ -51,6 +51,7 @@
     Plugin 'Solarized'
     Plugin 'ack.vim'
     Plugin 'ctrlp.vim'
+    Plugin 'jelera/vim-javascript-syntax'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Vundles, please ignore key map error messages"
@@ -167,8 +168,8 @@ imap <C-s> <Esc>:w<CR>i
 set foldcolumn=2
 " Use syntax folding and manual foldering
 augroup vimrc
-  au BufReadPre * setlocal foldmethod=indent
-  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+  au BufReadPre * setlocal foldmethod=syntax
+  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
 augroup END
 " Automatically save and restore folds (tip from the vim wikia)
 autocmd BufWinLeave *.* mkview
@@ -454,3 +455,8 @@ let g:airline_powerline_fonts = 1
 " => Settings for ack.vim 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Settings for CtrlP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
