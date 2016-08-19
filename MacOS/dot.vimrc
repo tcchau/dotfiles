@@ -51,7 +51,8 @@
     Plugin 'Solarized'
     Plugin 'ack.vim'
     Plugin 'ctrlp.vim'
-    Plugin 'jelera/vim-javascript-syntax'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'mxw/vim-jsx'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Vundles, please ignore key map error messages"
@@ -161,6 +162,9 @@ execute 'set viminfo=%,' . &viminfo
 noremap <C-s> :w<CR>
 " Works in insert mode, saves and puts back in insert mode
 imap <C-s> <Esc>:w<CR>i
+
+" Split line
+noremap K i<CR><Esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Folds
