@@ -40,9 +40,8 @@
     Plugin 'VundleVim/Vundle.vim'
 
     "Add your bundles here
-    Plugin 'Syntastic' "uber awesome syntax and errors highlighter
+    Plugin 'scrooloose/syntastic' "uber awesome syntax and errors highlighter
     Plugin 'altercation/vim-colors-solarized' "T-H-E colorscheme
-    Plugin 'https://github.com/tpope/vim-fugitive' "So awesome, it should be illegal 
     Plugin 'SuperTab'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
@@ -52,7 +51,24 @@
     Plugin 'ack.vim'
     Plugin 'ctrlp.vim'
     Plugin 'pangloss/vim-javascript'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'jistr/vim-nerdtree-tabs'   
     Plugin 'mxw/vim-jsx'
+    Plugin 'xolox/vim-misc'
+    Plugin 'xolox/vim-easytags'
+    Plugin 'majutsushi/tagbar'
+    " ----- Working with Git ----------------------------------------------
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'tpope/vim-fugitive'
+    " ----- Other text editing features -----------------------------------
+    Plugin 'Raimondi/delimitMate'
+    Plugin 'sheerun/vim-polyglot'
+    Plugin 'tpope/vim-surround'
+    Plugin 'cakebaker/scss-syntax.vim'
+    Plugin 'digitaltoad/vim-jade'
+    Plugin 'moll/vim-node'
+    Plugin 'othree/javascript-libraries-syntax.vim'
+    Plugin 'ternjs/tern_for_vim'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Vundles, please ignore key map error messages"
@@ -279,6 +295,7 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
+map <leader>t. :tabprevious<cr>
 map <leader>t<leader> :tabnext 
 
 " Let 'tl' toggle between this and the last accessed tab
@@ -464,3 +481,62 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " => Settings for CtrlP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Settings for Syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+augroup mySyntastic
+  au!
+  au FileType tex let b:syntastic_mode = "passive"
+augroup END
+
+
+" ----- jistr/vim-nerdtree-tabs -----
+" Open/close NERDTree Tabs with \t
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" To have NERDTree always open on startup
+let g:nerdtree_tabs_open_on_console_startup = 0
+
+" ----- xolox/vim-easytags settings -----
+" Where to look for tags files
+set tags=./tags;,~/.vimtags
+" Sensible defaults
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
+let g:easytags_async = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_resolve_links = 1
+let g:easytags_suppress_ctags_warning = 1
+
+" ----- majutsushi/tagbar settings -----
+" Open/close tagbar with \b
+nmap <silent> <leader>b :TagbarToggle<CR>
+" Uncomment to open tagbar automatically whenever possible
+"autocmd BufEnter * nested :call tagbar#autoopen(0)
+let g:tagbar_ctags_bin = "jsctags"
+
+" ----- airblade/vim-gitgutter settings -----
+" Required after having changed the colorscheme
+hi clear SignColumn
+" In vim-airline, only display "hunks" if the diff is non-zero
+let g:airline#extensions#hunks#non_zero_only = 1
+
+" ----- Raimondi/delimitMate settings -----
+let delimitMate_expand_cr = 1
+augroup mydelimitMate
+  au!
+  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+  au FileType tex let b:delimitMate_quotes = ""
+  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
+  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+augroup END
+
