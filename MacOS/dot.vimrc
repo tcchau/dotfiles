@@ -47,25 +47,24 @@
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'tpope/vim-sensible'
     Plugin 'vimux'
-    Plugin 'Solarized'
-    Plugin 'ack.vim'
+    "Plugin 'ack.vim'
     Plugin 'ctrlp.vim'
     Plugin 'pangloss/vim-javascript'
     Plugin 'scrooloose/nerdtree'
     Plugin 'jistr/vim-nerdtree-tabs'   
     Plugin 'mxw/vim-jsx'
-    Plugin 'xolox/vim-misc'
-    Plugin 'xolox/vim-easytags'
-    Plugin 'majutsushi/tagbar'
+    "Plugin 'xolox/vim-misc'
+    "Plugin 'xolox/vim-easytags'
+    "Plugin 'majutsushi/tagbar'
     " ----- Working with Git ----------------------------------------------
     Plugin 'airblade/vim-gitgutter'
     Plugin 'tpope/vim-fugitive'
     " ----- Other text editing features -----------------------------------
     Plugin 'Raimondi/delimitMate'
-    Plugin 'sheerun/vim-polyglot'
+    "Plugin 'sheerun/vim-polyglot'
     Plugin 'tpope/vim-surround'
-    Plugin 'cakebaker/scss-syntax.vim'
-    Plugin 'digitaltoad/vim-jade'
+    " Plugin 'cakebaker/scss-syntax.vim'
+    " Plugin 'digitaltoad/vim-jade'
     Plugin 'moll/vim-node'
     Plugin 'othree/javascript-libraries-syntax.vim'
     Plugin 'ternjs/tern_for_vim'
@@ -189,7 +188,7 @@ set foldcolumn=2
 " Use syntax folding and manual foldering
 augroup vimrc
   au BufReadPre * setlocal foldmethod=syntax
-  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
+  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 augroup END
 " Automatically save and restore folds (tip from the vim wikia)
 autocmd BufWinLeave *.* mkview
@@ -481,6 +480,8 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " => Settings for CtrlP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+nmap <c-p> :<c-u>CtrlPMRU<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -539,4 +540,5 @@ augroup mydelimitMate
   au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
-
+" ----- vim-jsx settings --------
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
