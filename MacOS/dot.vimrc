@@ -494,6 +494,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_quiet_messages = { "!level": "errors" }
 let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
 augroup mySyntastic
@@ -530,6 +531,7 @@ let g:tagbar_ctags_bin = "jsctags"
 hi clear SignColumn
 " In vim-airline, only display "hunks" if the diff is non-zero
 let g:airline#extensions#hunks#non_zero_only = 1
+let g:gitgutter_max_signs = 2000
 
 " ----- Raimondi/delimitMate settings -----
 let delimitMate_expand_cr = 1
