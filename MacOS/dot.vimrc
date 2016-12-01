@@ -46,7 +46,7 @@
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'tpope/vim-sensible'
-    Plugin 'vimux'
+    "Plugin 'vimux'
     "Plugin 'ack.vim'
     Plugin 'ctrlp.vim'
     Plugin 'pangloss/vim-javascript'
@@ -57,16 +57,16 @@
     "Plugin 'xolox/vim-easytags'
     "Plugin 'majutsushi/tagbar'
     " ----- Working with Git ----------------------------------------------
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'tpope/vim-fugitive'
+    " Plugin 'airblade/vim-gitgutter'
+    " Plugin 'tpope/vim-fugitive'
     " ----- Other text editing features -----------------------------------
     Plugin 'Raimondi/delimitMate'
     "Plugin 'sheerun/vim-polyglot'
-    Plugin 'tpope/vim-surround'
+    "Plugin 'tpope/vim-surround'
     " Plugin 'cakebaker/scss-syntax.vim'
     " Plugin 'digitaltoad/vim-jade'
-    Plugin 'moll/vim-node'
-    Plugin 'othree/javascript-libraries-syntax.vim'
+    " Plugin 'moll/vim-node'
+    " Plugin 'othree/javascript-libraries-syntax.vim'
     Plugin 'ternjs/tern_for_vim'
     "...All your other bundles...
     if iCanHazVundle == 0
@@ -188,7 +188,7 @@ set foldcolumn=2
 " Use syntax folding and manual foldering
 augroup vimrc
   au BufReadPre * setlocal foldmethod=syntax
-  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
 augroup END
 " Automatically save and restore folds (tip from the vim wikia)
 autocmd BufWinLeave *.* mkview
