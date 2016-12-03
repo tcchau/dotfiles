@@ -40,7 +40,8 @@
     Plugin 'VundleVim/Vundle.vim'
 
     "Add your bundles here
-    Plugin 'scrooloose/syntastic' "uber awesome syntax and errors highlighter
+    "Plugin 'Syntastic' "uber awesome syntax and errors highlighter
+    Plugin 'w0rp/ale'
     Plugin 'altercation/vim-colors-solarized' "T-H-E colorscheme
     Plugin 'SuperTab'
     Plugin 'vim-airline/vim-airline'
@@ -184,15 +185,15 @@ noremap K i<CR><Esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Folds
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldcolumn=2
+" set foldcolumn=2
 " Use syntax folding and manual foldering
-augroup vimrc
-  au BufReadPre * setlocal foldmethod=syntax
-  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
-augroup END
+"augroup vimrc
+""  au BufReadPre * setlocal foldmethod=manual
+""  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+"augroup END
 " Automatically save and restore folds (tip from the vim wikia)
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -485,9 +486,9 @@ nmap <c-p> :<c-u>CtrlPMRU<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -502,6 +503,18 @@ augroup mySyntastic
   au FileType tex let b:syntastic_mode = "passive"
 augroup END
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Settings for Ale
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%{ALEGetStatusline()}
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = "▲"
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
