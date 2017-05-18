@@ -47,7 +47,7 @@
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'tpope/vim-sensible'
-    Plugin 'vimux'
+    "Plugin 'vimux'
     "Plugin 'ack.vim'
     Plugin 'ctrlp.vim'
     Plugin 'pangloss/vim-javascript'
@@ -63,11 +63,11 @@
     " ----- Other text editing features -----------------------------------
     Plugin 'Raimondi/delimitMate'
     "Plugin 'sheerun/vim-polyglot'
-    Plugin 'tpope/vim-surround'
+    "Plugin 'tpope/vim-surround'
     " Plugin 'cakebaker/scss-syntax.vim'
     " Plugin 'digitaltoad/vim-jade'
-    Plugin 'moll/vim-node'
-    Plugin 'othree/javascript-libraries-syntax.vim'
+    " Plugin 'moll/vim-node'
+    " Plugin 'othree/javascript-libraries-syntax.vim'
     Plugin 'ternjs/tern_for_vim'
     "...All your other bundles...
     if iCanHazVundle == 0
