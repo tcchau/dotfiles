@@ -557,3 +557,7 @@ augroup mydelimitMate
 augroup END
 " ----- vim-jsx settings --------
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+"------ eslint auto-fix ---------
+autocmd bufwritepost *.js* silent !eslint --fix %
+set autoread
