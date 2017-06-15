@@ -90,7 +90,6 @@ fi
 ################################################################################
 DEFAULT_USER="clinton"
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-eval "$(rbenv init -)"
 stty -ixon
 bindkey -v
 
