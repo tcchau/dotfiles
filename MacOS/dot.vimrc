@@ -42,8 +42,10 @@
     "Add your bundles here
     "Plugin 'Syntastic' "uber awesome syntax and errors highlighter
     Plugin 'w0rp/ale'
+    Plugin 'Chiel92/vim-autoformat'
     Plugin 'altercation/vim-colors-solarized' "T-H-E colorscheme
     Plugin 'SuperTab'
+    Plugin 'Raimondi/delimitMate'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'tpope/vim-sensible'
@@ -61,14 +63,14 @@
     " Plugin 'airblade/vim-gitgutter'
     " Plugin 'tpope/vim-fugitive'
     " ----- Other text editing features -----------------------------------
-    Plugin 'Raimondi/delimitMate'
+    " Plugin 'Raimondi/delimitMate'
     "Plugin 'sheerun/vim-polyglot'
     "Plugin 'tpope/vim-surround'
     " Plugin 'cakebaker/scss-syntax.vim'
     " Plugin 'digitaltoad/vim-jade'
     " Plugin 'moll/vim-node'
     " Plugin 'othree/javascript-libraries-syntax.vim'
-    Plugin 'ternjs/tern_for_vim'
+    " Plugin 'ternjs/tern_for_vim'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Vundles, please ignore key map error messages"
@@ -248,7 +250,7 @@ set tabstop=2
 
 " Linebreak on 180 characters
 set linebreak
-set textwidth=180
+set textwidth=80
 
 set autoindent 
 set smartindent
@@ -558,6 +560,3 @@ augroup END
 " ----- vim-jsx settings --------
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-"------ eslint auto-fix ---------
-autocmd bufwritepost *.js* silent !eslint --fix %
-set autoread
