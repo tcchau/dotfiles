@@ -559,4 +559,7 @@ augroup mydelimitMate
 augroup END
 " ----- vim-jsx settings --------
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+" ----- esc key workarounds -------
+inoremap jj <esc>
+inoremap jk <esc>
 
