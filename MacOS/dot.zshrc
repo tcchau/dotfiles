@@ -55,7 +55,7 @@ plugins=(git)
 
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:./node_modules/.bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,3 +114,35 @@ export KEYTIMEOUT=1
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# turn off autopushd so that we use the dir stack manually
+unsetopt autopushd
+
+alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
+alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
+alias gitpruneremote="git remote prune origin"
+
+function fif() {
+  if [[ -n $1 && -n $2 ]] ; then
+    find . -name $1 -exec grep -Hin $2 {} \;
+  else
+    echo "Requires 2 patterns as arguments"
+  fi
+}
+
+function rmd() {
+  pandoc $1 | lynx -stdin
+}
+
+function reapdockerimages() {
+  docker rm $(docker ps -qa --no-trunc --filter "status=exited")
+  docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
+  docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+}

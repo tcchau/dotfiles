@@ -1,0 +1,69 @@
+set scrolloff=7
+
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch 
+
+" Use line numbers
+set number
+
+" Save without using escape
+" Works in normal mode
+noremap <C-s> :w<CR>
+" Works in insert mode, saves and puts back in insert mode
+imap <C-s> <Esc>:w<CR>i
+
+" Split line
+noremap K i<CR><Esc>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" Linebreak on 180 characters
+set textwidth=80
+
+set autoindent 
+set smartindent
+set wrap 
+set wrapmargin=180
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <c-space> ?
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" ----- esc key workarounds -------
+inoremap jj <esc>
+inoremap jk <esc>

@@ -509,14 +509,17 @@ augroup END
 " => Settings for Ale
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline+=%{ALEGetStatusline()}
+let g:ale_lint_delay = 250
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = "▲"
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'flow'],
 \}
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -550,6 +553,7 @@ let g:gitgutter_max_signs = 2000
 
 " ----- Raimondi/delimitMate settings -----
 let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 augroup mydelimitMate
   au!
   au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
@@ -562,4 +566,12 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 " ----- esc key workarounds -------
 inoremap jj <esc>
 inoremap jk <esc>
-
+" ----- automatically get rid of trailing whitespace
+autocmd BufWritePre *.js* %s/\s\+$//e
+" ----- work around for "Nothing in register" problem when
+" pasting from system clipboard
+if $TMUX == ''
+  set clipboard+=unnamed
+endif
+" ----- get back to my own mappings
+autocmd VimEnter * imap <S-Tab> <Plug>delimitMateS-Tab

@@ -16,6 +16,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
@@ -29,7 +31,7 @@
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopySelection</key>
-	<true/>
+	<false/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Solarized Dark</key>
@@ -281,6 +283,8 @@
 	<integer>32</integer>
 	<key>HotkeyCode</key>
 	<integer>49</integer>
+	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
 	<key>HotkeyModifiers</key>
 	<integer>524288</integer>
 	<key>IRMemory</key>
@@ -307,46 +311,45 @@
 	<false/>
 	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
-	<key>NSTableView Columns KeyBingingTable</key>
-	<array>
-		<data>
-		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
-		hAErATCG
-		</data>
-		<string>198</string>
-		<data>
-		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
-		hAErATGG
-		</data>
-		<string>307</string>
-	</array>
-	<key>NSTableView Hidden Columns KeyBingingTable</key>
-	<array/>
-	<key>NSTableView Sort Ordering KeyBingingTable</key>
-	<array/>
-	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
-	<dict>
-		<key>TB Is Shown</key>
-		<integer>1</integer>
-	</dict>
-	<key>NSWindow Frame Preferences</key>
-	<string>269 319 606 456 0 0 1280 777 </string>
-	<key>NSWindow Frame SUStatusFrame</key>
-	<string>440 486 400 129 0 0 1280 777 </string>
+	<key>NSTableView Columns v2 KeyBingingTable</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoK4HCA8aGxwdHh8gJjAxMlUkbnVsbNIJCgsOWk5TLm9iamVjdHNWJGNsYXNzogwN
+	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
+	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
+	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
+	DIAIgAlRMSNAc7Gdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
+	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
+	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
+	AAAAADoAAAAAAAAAAAAAAAAAAAFM
+	</data>
+	<key>NSTableView Sort Ordering v2 KeyBingingTable</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGFBVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKMHCA1VJG51bGzSCQoLDFpOUy5vYmplY3RzViRjbGFzc6CAAtIODxARWiRjbGFz
+	c25hbWVYJGNsYXNzZXNeTlNNdXRhYmxlQXJyYXmjEBITV05TQXJyYXlYTlNPYmplY3Rf
+	EA9OU0tleWVkQXJjaGl2ZXLRFhdVQXJyYXmAAQgRGiMtMjc7QUZRWFlbYGt0g4ePmKqt
+	swAAAAAAAAEBAAAAAAAAABgAAAAAAAAAAAAAAAAAAAC1
+	</data>
+	<key>NSTableView Supports v2 KeyBingingTable</key>
+	<true/>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>645 274 630 438 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>328 288 620 392 0 0 1280 777 </string>
+	<string>533 1416 620 392 -117 900 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>154 68 918 495 0 0 1440 877 </string>
+	<string>375 1234 958 451 -117 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>675 915 1019 1030 -226 900 1920 1057 </string>
+	<string>184 1209 665 477 -117 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>796 0 634 877 0 0 1440 900 </string>
+	<string>698 900 1089 1057 -117 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>28 221 1005 656 0 0 1440 900 </string>
+	<string>168 1480 665 477 -117 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>268 89 570 452 0 0 1280 777 </string>
+	<string>83 381 650 477 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>638 69 570 452 0 0 1280 777 </string>
+	<string>146 1427 570 452 0 1050 1920 1057 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2442,11 +2445,11 @@
 			<key>Name</key>
 			<string>Solarized</string>
 			<key>Non Ascii Font</key>
-			<string>MesloLGMDZ-RegularForPowerline 12</string>
+			<string>MesloLGMDZForPowerline-Regular 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>MesloLGMDZ-RegularForPowerline 12</string>
+			<string>MesloLGMDZForPowerline-Regular 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2624,9 +2627,9 @@
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>3D3574F4-060C-4E14-A1A6-096F37C871C4</string>
+	<string>61EDB354-514D-4EE3-ADD5-DD0BF18165BC</string>
 	<key>NoSyncLastTipTime</key>
-	<real>501606497.21727097</real>
+	<real>527957084.97637898</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2634,7 +2637,7 @@
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>494863985.82814002</real>
+	<real>519176830.29825598</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
 		<string>000</string>
@@ -2677,6 +2680,7 @@
 		<string>0036</string>
 		<string>0037</string>
 		<string>0038</string>
+		<string>0038</string>
 		<string>0039</string>
 		<string>0040</string>
 		<string>0041</string>
@@ -2689,6 +2693,27 @@
 		<string>0048</string>
 		<string>0049</string>
 		<string>0050</string>
+		<string>0051</string>
+		<string>0052</string>
+		<string>0053</string>
+		<string>0054</string>
+		<string>0055</string>
+		<string>0056</string>
+		<string>0057</string>
+		<string>0058</string>
+		<string>0059</string>
+		<string>0060</string>
+		<string>0061</string>
+		<string>0062</string>
+		<string>0063</string>
+		<string>0064</string>
+		<string>0065</string>
+		<string>0066</string>
+		<string>0067</string>
+		<string>0068</string>
+		<string>0069</string>
+		<string>0070</string>
+		<string>0071</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -2738,7 +2763,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/Clinton/dotfiles/MacOS</string>
+	<string>/Users/clinton/dotfiles/MacOS</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -2754,11 +2779,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=40</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=26</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-11-23T23:27:58Z</date>
+	<date>2017-10-05T16:41:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2817,6 +2842,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.12</string>
+	<string>3.1.3.beta.1</string>
 </dict>
 </plist>
