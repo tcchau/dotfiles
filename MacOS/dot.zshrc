@@ -112,22 +112,29 @@ export KEYTIMEOUT=1
 
 # my environment variables
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+export LESS="-F -E -X $LESS"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/clinton/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+[[ -f /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
 
 # turn off autopushd so that we use the dir stack manually
 unsetopt autopushd
+unsetopt inc_append_history
+unsetopt share_history
 
 alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
 alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
 alias gitpruneremote="git remote prune origin"
+alias sls="./mysls.sh"
+
+function gitchangelog() {
+  if [[ -n $1 ]] ; then
+    git log --grep="Merge branch" $1..HEAD
+  else
+    echo "Requires commit hash as argument"
+  fi
+}
 
 function fif() {
   if [[ -n $1 && -n $2 ]] ; then
@@ -146,3 +153,11 @@ function reapdockerimages() {
   docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
   docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 }
+
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
