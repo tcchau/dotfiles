@@ -126,7 +126,7 @@ unsetopt share_history
 alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
 alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
 alias gitpruneremote="git remote prune origin"
-alias sls="./mysls.sh"
+alias sls="../mysls.sh"
 
 function gitchangelog() {
   if [[ -n $1 ]] ; then
@@ -161,3 +161,7 @@ function reapdockerimages() {
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='fd --type f --follow'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

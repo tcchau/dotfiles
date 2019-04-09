@@ -44,18 +44,25 @@
     Plugin 'w0rp/ale'
     Plugin 'Chiel92/vim-autoformat'
     Plugin 'altercation/vim-colors-solarized' "T-H-E colorscheme
+    "Plugin 'leafgarland/typescript-vim'
+    "Plugin 'Valloric/YouCompleteMe'
     Plugin 'SuperTab'
     Plugin 'Raimondi/delimitMate'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'tpope/vim-sensible'
     "Plugin 'vimux'
-    "Plugin 'ack.vim'
-    Plugin 'ctrlp.vim'
+    Plugin 'mileszs/ack.vim'
+    "Plugin 'ctrlp.vim'
+    Plugin 'junegunn/fzf'
+    Plugin 'junegunn/fzf.vim'
     Plugin 'pangloss/vim-javascript'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'jistr/vim-nerdtree-tabs'   
+    "Plugin 'scrooloose/nerdtree'
+    "Plugin 'jistr/vim-nerdtree-tabs'   
     Plugin 'mxw/vim-jsx'
+    Plugin 'yuttie/comfortable-motion.vim'
+    "Plugin 'Quramy/tsuquyomi'
+    Plugin 'junegunn/goyo.vim'
     "Plugin 'xolox/vim-misc'
     "Plugin 'xolox/vim-easytags'
     "Plugin 'majutsushi/tagbar'
@@ -482,28 +489,8 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for CtrlP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
-nmap <c-p> :<c-u>CtrlPMRU<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Settings for Syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_quiet_messages = { "!level": "errors" }
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
-augroup mySyntastic
-  au!
-  au FileType tex let b:syntastic_mode = "passive"
-augroup END
+" let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+" nmap <c-p> :<c-u>CtrlPMRU<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for Ale
@@ -575,3 +562,10 @@ if $TMUX == ''
 endif
 " ----- get back to my own mappings
 autocmd VimEnter * imap <S-Tab> <Plug>delimitMateS-Tab
+" ----- add fzf
+set rtp+=/usr/local/bin/fzf
+nmap <Leader>, :Buffers<CR>
+nmap <Leader>. :Files<CR>
+nmap <Leader>r :Tags<CR>
+" ----- configuration for vim-javascript
+let g:javascript_plugin_flow = 1
