@@ -127,6 +127,7 @@ alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
 alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
 alias gitpruneremote="git remote prune origin"
 alias sls="../mysls.sh"
+alias gitlastlog="git log -1 --pretty=%B"
 
 function gitchangelog() {
   if [[ -n $1 ]] ; then
@@ -165,3 +166,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --follow'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/clinton/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/clinton/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

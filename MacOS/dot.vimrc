@@ -19,76 +19,55 @@
 "       changing settings at the vim command line.
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Setting up Vundle - the vim plugin bundler
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    let iCanHazVundle=1
-    let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-    if !filereadable(vundle_readme) 
-        echo "Installing Vundle.."
-        echo ""
-        silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-        let iCanHazVundle=0
-    endif
-    set nocompatible              " be iMproved, required
-    filetype off                  " required
-    set rtp+=~/.vim/bundle/Vundle.vim/
-    call vundle#begin()
-    " Let vundle manage vundle... mandatory
-    Plugin 'VundleVim/Vundle.vim'
-
-    "Add your bundles here
-    "Plugin 'Syntastic' "uber awesome syntax and errors highlighter
-    Plugin 'w0rp/ale'
-    Plugin 'Chiel92/vim-autoformat'
-    Plugin 'altercation/vim-colors-solarized' "T-H-E colorscheme
-    "Plugin 'leafgarland/typescript-vim'
-    "Plugin 'Valloric/YouCompleteMe'
-    Plugin 'SuperTab'
-    Plugin 'Raimondi/delimitMate'
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
-    Plugin 'tpope/vim-sensible'
-    "Plugin 'vimux'
-    Plugin 'mileszs/ack.vim'
-    "Plugin 'ctrlp.vim'
-    Plugin 'junegunn/fzf'
-    Plugin 'junegunn/fzf.vim'
-    Plugin 'pangloss/vim-javascript'
-    "Plugin 'scrooloose/nerdtree'
-    "Plugin 'jistr/vim-nerdtree-tabs'   
-    Plugin 'mxw/vim-jsx'
-    Plugin 'yuttie/comfortable-motion.vim'
-    "Plugin 'Quramy/tsuquyomi'
-    Plugin 'junegunn/goyo.vim'
-    "Plugin 'xolox/vim-misc'
-    "Plugin 'xolox/vim-easytags'
-    "Plugin 'majutsushi/tagbar'
-    " ----- Working with Git ----------------------------------------------
-    " Plugin 'airblade/vim-gitgutter'
-    " Plugin 'tpope/vim-fugitive'
-    " ----- Other text editing features -----------------------------------
-    " Plugin 'Raimondi/delimitMate'
-    "Plugin 'sheerun/vim-polyglot'
-    "Plugin 'tpope/vim-surround'
-    " Plugin 'cakebaker/scss-syntax.vim'
-    " Plugin 'digitaltoad/vim-jade'
-    " Plugin 'moll/vim-node'
-    " Plugin 'othree/javascript-libraries-syntax.vim'
-    " Plugin 'ternjs/tern_for_vim'
-    "...All your other bundles...
-    if iCanHazVundle == 0
-        echo "Installing Vundles, please ignore key map error messages"
-        echo ""
-        :PluginInstall
-    endif
-
-    call vundle#end() 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Setting up Vundle - the vim plugin bundler end
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+  "------------------------------------------------------------- general purpose
+  Plug 'w0rp/ale'
+  Plug 'altercation/vim-colors-solarized' "T-H-E colorscheme
+  Plug 'junegunn/seoul256.vim' 
+  Plug 'ervandew/supertab'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'tpope/vim-sensible'
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
+  Plug 'chiel92/vim-autoformat'
+  Plug 'mileszs/ack.vim'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+  Plug 'Raimondi/delimitMate'
+  "--------------------------------------------------------------- Javascript
+  Plug 'pangloss/vim-javascript'
+  Plug 'maxmellon/vim-jsx-pretty'
+  "--------------------------------------------------------------- Clojure
+  Plug 'guns/vim-clojure-static'
+  Plug 'tpope/vim-fireplace'
+  Plug 'luochen1990/rainbow'
+  Plug 'guns/vim-sexp'
+  Plug 'tpope/vim-sexp-mappings-for-regular-people'
+  Plug 'tpope/vim-salve'
+  Plug 'guns/vim-clojure-highlight'
+  "Plug 'xolox/vim-misc'
+  "Plug 'xolox/vim-easytags'
+  "Plug 'majutsushi/tagbar'
+  " ----- Working with Git ----------------------------------------------
+  " Plug 'airblade/vim-gitgutter'
+  " Plug 'tpope/vim-fugitive'
+  " ----- Other text editing features -----------------------------------
+  " Plug 'Raimondi/delimitMate'
+  "Plug 'sheerun/vim-polyglot'
+  "Plug 'tpope/vim-surround'
+  " Plug 'cakebaker/scss-syntax.vim'
+  " Plug 'digitaltoad/vim-jade'
+  " Plug 'moll/vim-node'
+  " Plug 'othree/javascript-libraries-syntax.vim'
+  " Plug 'ternjs/tern_for_vim'
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -97,8 +76,9 @@
 set history=500
 
 " Enable filetype plugins
-filetype plugin on
-filetype indent on
+" Unnecessary with vim-plug
+" filetype plugin on
+" filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -157,9 +137,10 @@ set lazyredraw
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+"set showmatch 
+
 " How many tenths of a second to blink when matching brackets
-set matchtime=2
+"set matchtime=2
 
 " No annoying sound on errors
 set noerrorbells
@@ -189,7 +170,7 @@ noremap <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>i
 
 " Split line
-noremap K i<CR><Esc>
+" noremap K i<CR><Esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Folds
@@ -200,19 +181,25 @@ noremap K i<CR><Esc>
 ""  au BufReadPre * setlocal foldmethod=manual
 ""  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 "augroup END
+" set foldmethod=syntax "syntax highlighting items specify folds
+" set foldcolumn=1 "defines 1 col at window left, to indicate folding
+" let javaScript_fold=1 "activate folding by JS syntax
+" set foldlevelstart=99 "start file with all folds opened
 " Automatically save and restore folds (tip from the vim wikia)
 "autocmd BufWinLeave *.* mkview
 "autocmd BufWinEnter *.* silent loadview 
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+" Unnecessary with vim-plug
+" syntax enable 
 
 try
-    colorscheme desert
+    "colorscheme desert
+    "colorscheme seoul256
+    colorscheme solarized
 catch
 endtry
 
@@ -360,15 +347,6 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -456,29 +434,14 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for solarized
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-set background=dark
-colorscheme solarized
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Settings for vimux
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader>vp :VimuxPromptCommand<CR>
-map <Leader>vl :VimuxRunLastCommand<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Settings for CommandT
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:CommandTCancelMap=['<C-c>', '<Esc>']
-let g:CommandTRefreshMap=['<C-f>']
-" nnoremap <silent> <Leader>f <Plug>(CommandT)
-" nnoremap <silent> <Leader>u <Plug>(CommandTBuffer)
-" noremap <Leader>ct :CommandT<CR>
+"syntax enable
+"set background=dark
+"colorscheme solarized
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for Airline 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd VimEnter * AirlineTheme "solarized dark"
+autocmd VimEnter * AirlineTheme luna
 let g:airline_powerline_fonts = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -487,16 +450,10 @@ let g:airline_powerline_fonts = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Settings for CtrlP
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
-" nmap <c-p> :<c-u>CtrlPMRU<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for Ale
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline+=%{ALEGetStatusline()}
-let g:ale_lint_delay = 250
+"set statusline+=%{ALEGetStatusline()}
+let g:ale_lint_delay = 1000
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = "▲"
@@ -510,9 +467,9 @@ nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
-let g:nerdtree_tabs_open_on_console_startup = 0
+" let g:nerdtree_tabs_open_on_console_startup = 0
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
@@ -547,14 +504,15 @@ augroup mydelimitMate
   au FileType tex let b:delimitMate_quotes = ""
   au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+  au FileType clojure let b:delimitMate_nesting_quotes = [ "'" ]
 augroup END
-" ----- vim-jsx settings --------
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 " ----- esc key workarounds -------
 inoremap jj <esc>
 inoremap jk <esc>
-" ----- automatically get rid of trailing whitespace
-autocmd BufWritePre *.js* %s/\s\+$//e
+" ----- consider JSX files as javascript
+" au BufRead,BufNewFile *.jsx set filetype=javascript
+" ----- automatically autoformat on save
+autocmd BufWrite *.js* :Autoformat
 " ----- work around for "Nothing in register" problem when
 " pasting from system clipboard
 if $TMUX == ''
@@ -569,3 +527,24 @@ nmap <Leader>. :Files<CR>
 nmap <Leader>r :Tags<CR>
 " ----- configuration for vim-javascript
 let g:javascript_plugin_flow = 1
+" ----- other configs will clobber this if I don't put it at the end
+" hi Folded term=NONE cterm=NONE 
+"
+" Activate Limelight if activating Goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" ----------- rainbow
+" clojure rainbow parens
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+      \  'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+      \  'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \  'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+      \  'separately': {
+      \      '*': 0,
+      \      'clojure': {},
+      \  }
+      \}
