@@ -172,23 +172,6 @@ imap <C-s> <Esc>:w<CR>i
 " Split line
 " noremap K i<CR><Esc>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Folds
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set foldcolumn=2
-" Use syntax folding and manual foldering
-"augroup vimrc
-""  au BufReadPre * setlocal foldmethod=manual
-""  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-"augroup END
-" set foldmethod=syntax "syntax highlighting items specify folds
-" set foldcolumn=1 "defines 1 col at window left, to indicate folding
-" let javaScript_fold=1 "activate folding by JS syntax
-" set foldlevelstart=99 "start file with all folds opened
-" Automatically save and restore folds (tip from the vim wikia)
-"autocmd BufWinLeave *.* mkview
-"autocmd BufWinEnter *.* silent loadview 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -528,7 +511,11 @@ nmap <Leader>r :Tags<CR>
 " ----- configuration for vim-javascript
 let g:javascript_plugin_flow = 1
 " ----- other configs will clobber this if I don't put it at the end
-" hi Folded term=NONE cterm=NONE 
+hi Folded term=NONE cterm=NONE 
+augroup vimrc
+  au BufReadPre * setlocal foldmethod=indent
+  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+augroup END
 "
 " Activate Limelight if activating Goyo
 autocmd! User GoyoEnter Limelight
