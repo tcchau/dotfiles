@@ -38,12 +38,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/limelight.vim'
   Plug 'chiel92/vim-autoformat'
   Plug 'mileszs/ack.vim'
-  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'Raimondi/delimitMate'
   "--------------------------------------------------------------- Javascript
   Plug 'pangloss/vim-javascript'
   Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'hail2u/vim-css3-syntax'
   "--------------------------------------------------------------- Clojure
   Plug 'guns/vim-clojure-static'
   Plug 'tpope/vim-fireplace'
@@ -535,3 +536,9 @@ let g:rainbow_conf = {
       \      'clojure': {},
       \  }
       \}
+" ---- better css
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
