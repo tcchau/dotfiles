@@ -442,8 +442,20 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = "▲"
 let g:ale_linters = {
-\   'javascript': ['eslint', 'flow'],
+\   'javascript': ['prettier', 'eslint', 'flow'],
+\   'javascriptreact': ['prettier', 'eslint', 'flow'],
+\   'css': ['prettier'],
+\   'sass': ['prettier'],
+\   'html': ['prettier'],
 \}
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'javascriptreact': ['prettier'],
+\   'css': ['prettier'],
+\   'sass': ['prettier'],
+\   'html': ['prettier'],
+\}
+let g:ale_fix_on_save=1
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 nmap <silent> <leader>aj :ALENext<cr>
@@ -496,7 +508,8 @@ inoremap jk <esc>
 " ----- consider JSX files as javascript
 " au BufRead,BufNewFile *.jsx set filetype=javascript
 " ----- automatically autoformat on save
-autocmd BufWrite *.js* :Autoformat
+" disabled in favour of ale:fix_on_save
+"autocmd BufWrite *.js* :Autoformat
 " ----- work around for "Nothing in register" problem when
 " pasting from system clipboard
 if $TMUX == ''
