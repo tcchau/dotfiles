@@ -445,14 +445,14 @@ let g:ale_linters = {
 \   'javascript': ['prettier', 'eslint', 'flow'],
 \   'javascriptreact': ['prettier', 'eslint', 'flow'],
 \   'css': ['prettier'],
-\   'sass': ['prettier'],
+\   'scss': ['prettier'],
 \   'html': ['prettier'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'javascriptreact': ['prettier'],
 \   'css': ['prettier'],
-\   'sass': ['prettier'],
+\   'scss': ['prettier'],
 \   'html': ['prettier'],
 \}
 let g:ale_fix_on_save=1
