@@ -527,8 +527,13 @@ let g:javascript_plugin_flow = 1
 " ----- other configs will clobber this if I don't put it at the end
 hi Folded term=NONE cterm=NONE 
 augroup vimrc
-  au BufReadPre * setlocal foldmethod=indent
+  au BufReadPre * setlocal foldmethod=manual
   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+augroup END
+augroup remember_folds
+    autocmd!
+    autocmd BufWinLeave ?* mkview | filetype detect
+    autocmd BufWinEnter ?* silent loadview | filetype detect
 augroup END
 "
 " Activate Limelight if activating Goyo
