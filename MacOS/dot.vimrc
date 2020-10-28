@@ -530,11 +530,14 @@ augroup vimrc
   au BufReadPre * setlocal foldmethod=manual
   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 augroup END
-augroup remember_folds
-    autocmd!
-    autocmd BufWinLeave ?* mkview | filetype detect
-    autocmd BufWinEnter ?* silent loadview | filetype detect
-augroup END
+augroup AutoSaveFolds
+  autocmd!
+  " view files are about 500 bytes
+  " bufleave but not bufwinleave captures closing 2nd tab
+  " nested is needed by bufwrite* (if triggered via other autocmd)
+  autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview! | filetype detect
+  autocmd BufWinEnter ?* silent! loadview | filetype detect
+augroup end
 "
 " Activate Limelight if activating Goyo
 autocmd! User GoyoEnter Limelight
@@ -557,6 +560,7 @@ let g:rainbow_conf = {
 " ---- better css
 augroup VimCSS3Syntax
   autocmd!
-
   autocmd FileType css setlocal iskeyword+=-
 augroup END
+set viewoptions=folds,cursor
+set sessionoptions=folds
