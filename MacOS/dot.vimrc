@@ -209,8 +209,10 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 " Swapfile left on in case of disconnections in remote seesions
+" Actually leave swapfile off too
 set nobackup
 set nowritebackup
+set noswapfile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -562,5 +564,4 @@ augroup VimCSS3Syntax
   autocmd!
   autocmd FileType css setlocal iskeyword+=-
 augroup END
-set viewoptions=folds,cursor
-set sessionoptions=folds
+set cmdheight=2
