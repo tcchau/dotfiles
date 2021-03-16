@@ -45,6 +45,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript'
   Plug 'maxmellon/vim-jsx-pretty'
   Plug 'hail2u/vim-css3-syntax'
+  "--------------------------------------------------------------- Typescript
+  Plug 'leafgarland/typescript-vim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  let g:coc_global_extensions = [
+    \ 'coc-tsserver'
+    \ ]
   "--------------------------------------------------------------- Clojure
   Plug 'guns/vim-clojure-static'
   Plug 'tpope/vim-fireplace'
@@ -451,8 +457,9 @@ let g:ale_linters = {
 \   'html': ['prettier'],
 \}
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'javascriptreact': ['prettier'],
+\   'javascript': ['eslint', 'prettier'],
+\   'javascriptreact': ['eslint', 'prettier'],
+\   'typescriptreact': ['eslint', 'prettier'],
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
@@ -559,9 +566,19 @@ let g:rainbow_conf = {
       \      'clojure': {},
       \  }
       \}
-" ---- better css
+" --- better css
 augroup VimCSS3Syntax
   autocmd!
   autocmd FileType css setlocal iskeyword+=-
 augroup END
 set cmdheight=2
+
+" -------- coc
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <Leader>d :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
+nmap <Leader>do <Plug>(coc-codeaction)
+nmap <silent> t[ <Plug>(coc-diagnostic-prev)
+nmap <silent> t] <Plug>(coc-diagnostic-next)

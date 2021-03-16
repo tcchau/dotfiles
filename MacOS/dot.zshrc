@@ -172,3 +172,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [[ -f /Users/clinton/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/clinton/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# for jenv, java runtime version manager
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
