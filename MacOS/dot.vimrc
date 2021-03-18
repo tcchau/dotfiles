@@ -529,7 +529,7 @@ autocmd VimEnter * imap <S-Tab> <Plug>delimitMateS-Tab
 " ----- add fzf
 set rtp+=/usr/local/bin/fzf
 nmap <Leader>, :Buffers<CR>
-nmap <Leader>. :Files<CR>
+nmap <Leader>. :GFiles<CR>
 nmap <Leader>r :Tags<CR>
 " ----- configuration for vim-javascript
 let g:javascript_plugin_flow = 1
