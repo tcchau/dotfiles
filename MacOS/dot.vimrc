@@ -42,11 +42,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'Raimondi/delimitMate'
   "--------------------------------------------------------------- Javascript
-  Plug 'pangloss/vim-javascript'
+  "Plug 'pangloss/vim-javascript'
+  Plug 'othree/yajs.vim'
   Plug 'maxmellon/vim-jsx-pretty'
   Plug 'hail2u/vim-css3-syntax'
   "--------------------------------------------------------------- Typescript
-  Plug 'leafgarland/typescript-vim'
+  "Plug 'leafgarland/typescript-vim'
+  Plug 'HerringtonDarkholme/yats.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   let g:coc_global_extensions = [
     \ 'coc-tsserver'
@@ -529,7 +531,7 @@ autocmd VimEnter * imap <S-Tab> <Plug>delimitMateS-Tab
 " ----- add fzf
 set rtp+=/usr/local/bin/fzf
 nmap <Leader>, :Buffers<CR>
-nmap <Leader>. :GFiles<CR>
+nmap <Leader>. :Files<CR>
 nmap <Leader>r :Tags<CR>
 " ----- configuration for vim-javascript
 let g:javascript_plugin_flow = 1
@@ -582,3 +584,6 @@ nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
 nmap <Leader>do <Plug>(coc-codeaction)
 nmap <silent> t[ <Plug>(coc-diagnostic-prev)
 nmap <silent> t] <Plug>(coc-diagnostic-next)
+" --------- syntax highlight sync, may cause performance problems.
+"autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+"autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
