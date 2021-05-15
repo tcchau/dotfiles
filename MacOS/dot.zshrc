@@ -155,6 +155,14 @@ function reapdockerimages() {
   docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 }
 
+function list-unmerged {
+  git ls-files --unmerged | cut -f2 | sort -u ;
+}
+
+alias add-unmerged="list-unmerged | xargs git add"
+
+alias edit-unmerged="list-unmerged | xargs vim"
+
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
