@@ -218,8 +218,8 @@ endif
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 " Swapfile left on in case of disconnections in remote seesions
 " Actually leave swapfile off too
-set nobackup
-set nowritebackup
+set backup
+set writebackup
 set noswapfile
 
 
@@ -537,10 +537,13 @@ nmap <Leader>r :Tags<CR>
 let g:javascript_plugin_flow = 1
 " ----- other configs will clobber this if I don't put it at the end
 hi Folded term=NONE cterm=NONE 
-augroup vimrc
-  au BufReadPre * setlocal foldmethod=manual
-  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-augroup END
+set foldmethod=syntax "syntax highlighting items specify folds  
+set foldcolumn=1 "defines 1 col at window left, to indicate folding  
+let typescript_fold=1 "activate folding by syntax  
+let typescriptreact_fold=1 "activate folding by syntax  
+let javascript_fold=1 "activate folding by syntax  
+let javacriptreact_fold=1 "activate folding by syntax  
+set foldlevelstart=99 "start file with all folds opened
 augroup AutoSaveFolds
   autocmd!
   " view files are about 500 bytes
