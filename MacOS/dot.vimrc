@@ -457,6 +457,7 @@ let g:ale_linters = {
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
+\   'json': ['spectral'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['eslint', 'prettier'],
@@ -465,6 +466,7 @@ let g:ale_fixers = {
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
+\   'json': ['fixjson'],
 \}
 let g:ale_fix_on_save=1
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
