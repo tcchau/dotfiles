@@ -461,6 +461,7 @@ let g:ale_linters = {
 \   'json': ['spectral'],
 \}
 let g:ale_fixers = {
+\   'xml': ['xmllint'],
 \   'javascript': ['prettier'],
 \   'javascriptreact': ['prettier'],
 \   'typescriptreact': ['prettier'],
