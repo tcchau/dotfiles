@@ -220,8 +220,9 @@ endif
 " Actually leave swapfile off too
 set backup
 set writebackup
-set noswapfile
-
+set swapfile
+set backupdir=./.backup,.,/tmp
+set directory=.,./.backup,/tmp
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -452,17 +453,18 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = "▲"
 let g:ale_linters = {
-\   'javascript': ['prettier', 'eslint', 'flow'],
-\   'javascriptreact': ['prettier', 'eslint', 'flow'],
+\   'javascript': ['eslint'],
+\   'javascriptreact': ['eslint'],
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
 \   'json': ['spectral'],
 \}
 let g:ale_fixers = {
-\   'javascript': ['eslint', 'prettier'],
-\   'javascriptreact': ['eslint', 'prettier'],
-\   'typescriptreact': ['eslint', 'prettier'],
+\   'javascript': ['prettier'],
+\   'javascriptreact': ['prettier'],
+\   'typescriptreact': ['prettier'],
+\   'typescript': ['prettier'],
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
@@ -589,6 +591,7 @@ nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
 nmap <Leader>do <Plug>(coc-codeaction)
 nmap <silent> t[ <Plug>(coc-diagnostic-prev)
 nmap <silent> t] <Plug>(coc-diagnostic-next)
+nmap <Leader>rn <Plug>(coc-rename)
 " --------- syntax highlight sync, may cause performance problems.
 "autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 "autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
