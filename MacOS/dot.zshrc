@@ -170,7 +170,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 ##### Platform-specific changes
 #####
 
-if [[ $(uname -r)] == ^*Darwin$ ]]; then
+if [[ $(uname) == "Darwin" ]]; then
   ### FZF stuff
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   export FZF_DEFAULT_COMMAND='fd --type f --follow'
@@ -192,6 +192,7 @@ if [[ $(uname -r)] == ^*Darwin$ ]]; then
 fi
 
 
-if [[ $(uname -r)] == ^*Linux$ ]]; then
+if [[ $(uname) == "Linux" ]]; then
+  echo Loading fzf key bindings...
   source /usr/share/doc/fzf/examples/key-bindings.zsh
 fi
