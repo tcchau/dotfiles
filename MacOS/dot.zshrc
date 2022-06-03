@@ -1,11 +1,12 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/clinton/.oh-my-zsh
+
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="jonathan"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,7 +50,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-syntax-highlighting)
 
 # User configuration
 
@@ -89,7 +90,6 @@ fi
 #
 ################################################################################
 DEFAULT_USER="clinton"
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 stty -ixon
 bindkey -v
 
@@ -111,17 +111,13 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 # my environment variables
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
 export LESS="-F -E -X $LESS"
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
 
 # turn off autopushd so that we use the dir stack manually
 unsetopt autopushd
 unsetopt inc_append_history
 unsetopt share_history
+
 
 alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
 alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
@@ -163,9 +159,6 @@ alias add-unmerged="list-unmerged | xargs git add"
 
 alias edit-unmerged="list-unmerged | xargs vim"
 
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -175,12 +168,24 @@ export NVM_DIR="$HOME/.nvm"
 export FZF_DEFAULT_COMMAND='fd --type f --follow'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/clinton/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/clinton/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# for jenv, java runtime version manager
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+#####
+##### Platform-specific changes
+#####
+
+if [[ $(uname -r)] == ^*Darwin$ ]]; then
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
+
+  # for jenv, java runtime version manager
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+
+  #
+  # tabtab source for serverless package
+  # uninstall by removing these lines or running `tabtab uninstall serverless`
+  [[ -f /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+  # tabtab source for sls package
+  # uninstall by removing these lines or running `tabtab uninstall sls`
+  [[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
+fi
