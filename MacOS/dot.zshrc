@@ -164,10 +164,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='fd --type f --follow'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 #####
@@ -175,6 +171,11 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 #####
 
 if [[ $(uname -r)] == ^*Darwin$ ]]; then
+  ### FZF stuff
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  export FZF_DEFAULT_COMMAND='fd --type f --follow'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
   export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
 
   # for jenv, java runtime version manager
@@ -188,4 +189,9 @@ if [[ $(uname -r)] == ^*Darwin$ ]]; then
   # tabtab source for sls package
   # uninstall by removing these lines or running `tabtab uninstall sls`
   [[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
+fi
+
+
+if [[ $(uname -r)] == ^*Linux$ ]]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
 fi
