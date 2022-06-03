@@ -61,6 +61,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-sexp-mappings-for-regular-people'
   Plug 'tpope/vim-salve'
   Plug 'guns/vim-clojure-highlight'
+  Plug 'github/copilot.vim'
   "Plug 'xolox/vim-misc'
   "Plug 'xolox/vim-easytags'
   "Plug 'majutsushi/tagbar'
@@ -221,9 +222,9 @@ endif
 set backup
 set writebackup
 set swapfile
-set backupdir=./.backup,.,/tmp
-set directory=.,./.backup,/tmp
-
+set backupdir=.backup/,~/.backup/,/tmp//
+set directory=.swp/,~/.swp/,/tmp//
+set undodir=.undo/,~/.undo/,/tmp//
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -459,6 +460,7 @@ let g:ale_linters = {
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
 \   'json': ['spectral'],
+\   'python': ['black'],
 \}
 let g:ale_fixers = {
 \   'xml': ['xmllint'],
@@ -470,6 +472,7 @@ let g:ale_fixers = {
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
 \   'json': ['fixjson'],
+\   'python': ['black'],
 \}
 let g:ale_fix_on_save=1
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
@@ -593,6 +596,22 @@ nmap <Leader>do <Plug>(coc-codeaction)
 nmap <silent> t[ <Plug>(coc-diagnostic-prev)
 nmap <silent> t] <Plug>(coc-diagnostic-next)
 nmap <Leader>rn <Plug>(coc-rename)
+"
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 " --------- syntax highlight sync, may cause performance problems.
 "autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 "autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+" suppress syntax highlighting if colums exceed 2K, usually indication of
+" minified JS code
+set synmaxcol=2048
