@@ -110,7 +110,7 @@ source $ZSH/oh-my-zsh.sh
 
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 
 # Preferred editor for local and remote sessions
@@ -210,10 +210,14 @@ alias add-unmerged="list-unmerged | xargs git add"
 
 alias edit-unmerged="list-unmerged | xargs vim"
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 #####
 ##### Platform-specific changes
 #####
-
 if [[ $(uname) == "Darwin" ]]; then
   ### FZF stuff
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -227,11 +231,6 @@ if [[ $(uname) == "Darwin" ]]; then
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
   export PATH="$HOME/.jenv/bin:$PATH"
   eval "$(jenv init -)"
-
-  # NVM
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
   #
   # tabtab source for serverless package
