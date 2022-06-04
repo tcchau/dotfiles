@@ -210,6 +210,9 @@ alias add-unmerged="list-unmerged | xargs git add"
 
 alias edit-unmerged="list-unmerged | xargs vim"
 
+# requires higher limit on file handles for model training in python
+ulimit -n 10240
+
 #####
 ##### Platform-specific changes
 #####
@@ -240,8 +243,22 @@ if [[ $(uname) == "Darwin" ]]; then
   # tabtab source for sls package
   # uninstall by removing these lines or running `tabtab uninstall sls`
   [[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
-fi
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/Users/clinton/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/Users/clinton/miniforge3/etc/profile.d/conda.sh" ]; then
+          . "/Users/clinton/miniforge3/etc/profile.d/conda.sh"
+      else
+          export PATH="/Users/clinton/miniforge3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+# <<< conda initialize <<<
+fi
 
 if [[ $(uname) == "Linux" ]]; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
