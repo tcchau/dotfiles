@@ -244,5 +244,5 @@ fi
 
 
 if [[ $(uname) == "Linux" ]]; then
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
