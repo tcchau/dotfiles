@@ -30,7 +30,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'w0rp/ale'
   Plug 'altercation/vim-colors-solarized' "T-H-E colorscheme
   Plug 'junegunn/seoul256.vim' 
-  Plug 'ervandew/supertab'
+  "Plug 'ervandew/supertab'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'tpope/vim-sensible'
@@ -615,3 +615,7 @@ endfunction
 " suppress syntax highlighting if colums exceed 2K, usually indication of
 " minified JS code
 set synmaxcol=2048
+
+" ----------- coc.vim completion shortcut
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
