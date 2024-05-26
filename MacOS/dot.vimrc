@@ -28,7 +28,9 @@ endif
 call plug#begin('~/.vim/plugged')
   "------------------------------------------------------------- general purpose
   Plug 'w0rp/ale'
-  Plug 'altercation/vim-colors-solarized' "T-H-E colorscheme
+  "Plug 'altercation/vim-colors-solarized' "T-H-E colorscheme
+  Plug 'morhetz/gruvbox'
+  "Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'junegunn/seoul256.vim' 
   "Plug 'ervandew/supertab'
   Plug 'vim-airline/vim-airline'
@@ -192,7 +194,7 @@ imap <C-s> <Esc>:w<CR>i
 try
     "colorscheme desert
     "colorscheme seoul256
-    colorscheme solarized
+    "colorscheme solarized
 catch
 endtry
 
@@ -222,9 +224,9 @@ endif
 set backup
 set writebackup
 set swapfile
-set backupdir=.backup/,~/.backup/,/tmp//
-set directory=.swp/,~/.swp/,/tmp//
-set undodir=.undo/,~/.undo/,/tmp//
+set backupdir=/tmp/,.backup/,~/.backup/
+set directory=/tmp/,.swp/,~/.swp/
+set undodir=/tmp/,.undo/,~/.undo/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -433,11 +435,14 @@ endfunction
 "syntax enable
 "set background=dark
 "colorscheme solarized
+colorscheme gruvbox
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Settings for Airline 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd VimEnter * AirlineTheme luna
+"autocmd VimEnter * AirlineTheme luna
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 let g:airline_powerline_fonts = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -450,27 +455,27 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set statusline+=%{ALEGetStatusline()}
 let g:ale_lint_delay = 1000
+let g:ale_linters_explicit = 1 
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = "▲"
+"let g:ale_linters_ignore = {
+"\   'typescript': ['eslint'],
+"\   'typescriptreact': ['eslint'],
+"\}
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'javascriptreact': ['eslint'],
+\   'typescript': ['eslint'],
+\   'typescriptreact': ['eslint'],
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
-\   'json': ['spectral'],
+\   'json': ['eslint'],
 \   'python': ['black'],
 \}
 let g:ale_fixers = {
 \   'xml': ['xmllint'],
-\   'javascript': ['prettier'],
-\   'javascriptreact': ['prettier'],
-\   'typescriptreact': ['prettier'],
-\   'typescript': ['prettier'],
-\   'css': ['prettier'],
-\   'scss': ['prettier'],
-\   'html': ['prettier'],
 \   'json': ['fixjson'],
 \   'python': ['black'],
 \}
@@ -609,6 +614,7 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 " --------- syntax highlight sync, may cause performance problems.
 "autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 "autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
@@ -619,3 +625,11 @@ set synmaxcol=2048
 " ----------- coc.vim completion shortcut
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+if has('nvim')
+  inoremap <silent><expr> <c-C> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" ----------- quickfix window configuration
+noremap <F9> :vertical botright copen 60<cr>
+noremap <F10> :copen 40<cr>

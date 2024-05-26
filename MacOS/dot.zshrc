@@ -1,3 +1,20 @@
+################################################################################
+#
+# My own customizations
+# stty commands have to precede the p10k instant prompt
+# to avoid warnings about instant prompt errors if there is console i/o after
+# powerlevel10k is loaded.
+#
+################################################################################
+stty -ixon
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +25,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="jonathan"
+# ZSH_THEME="jonathan"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -140,7 +158,6 @@ fi
 #
 ################################################################################
 DEFAULT_USER="clinton"
-stty -ixon
 
 # VIM key bindings for command line editing
 bindkey -v
@@ -218,6 +235,9 @@ export NVM_DIR="$HOME/.nvm"
 # requires higher limit on file handles for model training in python
 ulimit -n 10240
 
+# plain mode without plugins
+alias vi="vim -u NONE"
+
 #####
 ##### Platform-specific changes
 #####
@@ -230,10 +250,10 @@ if [[ $(uname) == "Darwin" ]]; then
   export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
 
   # for jenv, java runtime version manager
-  export PATH="/usr/local/bin:/usr/local/opt:./node_modules/.bin:$PATH"
-  export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-  export PATH="$HOME/.jenv/bin:$PATH"
-  eval "$(jenv init -)"
+  # export PATH="/usr/local/bin:/usr/local/opt:./node_modules/.bin:$PATH"
+  # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  # export PATH="$HOME/.jenv/bin:$PATH"
+  # eval "$(jenv init -)"
 
   #
   # tabtab source for serverless package
@@ -243,22 +263,26 @@ if [[ $(uname) == "Darwin" ]]; then
   # uninstall by removing these lines or running `tabtab uninstall sls`
   [[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-  __conda_setup="$('/Users/clinton/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-  if [ $? -eq 0 ]; then
-      eval "$__conda_setup"
-  else
-      if [ -f "/Users/clinton/miniforge3/etc/profile.d/conda.sh" ]; then
-          . "/Users/clinton/miniforge3/etc/profile.d/conda.sh"
-      else
-          export PATH="/Users/clinton/miniforge3/bin:$PATH"
-      fi
-  fi
-  unset __conda_setup
-# <<< conda initialize <<<
 fi
 
 if [[ $(uname) == "Linux" ]]; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
+
+# install path for Deno if directory exists
+if [[ -d "$HOME/.deno/bin" ]]; then
+  export DENO_INSTALL="/Users/clinton/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
+# pyenv initialization
+eval "$(pyenv init -)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# shorthand for cryptic names
+export SHFCNMYPTEST="E2PI9QSGISSB91"
+export SHFCNMYPPROD="EH1W8JVUBQYBG"
+export SHFCNMYPSTAGING="EYZUOGFZ946FS"
+export SHFCNAPPLINKS="E38OLWYI3JK9QI"
