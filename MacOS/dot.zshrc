@@ -286,3 +286,15 @@ export SHFCNMYPTEST="E2PI9QSGISSB91"
 export SHFCNMYPPROD="EH1W8JVUBQYBG"
 export SHFCNMYPSTAGING="EYZUOGFZ946FS"
 export SHFCNAPPLINKS="E38OLWYI3JK9QI"
+
+# aliases for using different configurations of neovim
+vv() {
+  # Assumes all configs exist in directories named ~/.config/nvim-*
+  local config=$(fd --max-depth 1 --glob 'nvim-*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
+ 
+  # If I exit fzf without selecting a config, don't open Neovim
+  [[ -z $config ]] && echo "No config selected" && return
+ 
+  # Open Neovim with the selected config
+  NVIM_APPNAME=$(basename $config) nvim $@
+}
