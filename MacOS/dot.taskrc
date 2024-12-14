@@ -1,6 +1,0 @@
-taskd.certificate=~/.taskwarrior/private.certificate.pem
-taskd.key=~/.taskwarrior/private.key.pem
-taskd.ca=~/.taskwarrior/ca.cert.pem
-taskd.server=taskwarrior.inthe.am:53589
-taskd.credentials=inthe_am/clinton.chau/021949fa-c338-48d4-bae5-0f1ba9836b20
-taskd.trust=ignore hostname
