@@ -5,15 +5,9 @@ local config = {
 }
 
 wezterm.on("gui-startup", function(cmd)
-	local _tab, _pane, window = mux.spawn_window(cmd or {})
+	local frontend_tab, _, window = mux.spawn_window(cmd or { cwd = "/Users/clinton/pcode/repos/Frontend" })
 	window:gui_window():maximize()
-	local frontend_tab, frontend_pane = window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/Frontend" })
-	frontend_tab:set_title("frontend/docker")
-	frontend_pane:split({
-		direction = "Right",
-		size = 0.5,
-		cwd = "/Users/clinton/pcode/repos/Dockerization",
-	})
+	frontend_tab:set_title("frontend")
 	local microservices_tab, microservices_pane = window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/Microservices" })
 	microservices_tab:set_title("lambda/types")
 	microservices_pane:split({
@@ -26,23 +20,16 @@ wezterm.on("gui-startup", function(cmd)
 	servers_pane:split({
 		direction = "Right",
 		size = 0.5,
-		cwd = "/Users/clinton/pcode/repos/Dockerization",
+		cwd = "/Users/clinton/pcode/repos/mypeekaville.com",
 	})
-	local aws_scripts_tab, aws_scripts_pane = window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/aws-scripts" })
-	aws_scripts_tab:set_title("aws-scripts/content-meta")
-	aws_scripts_pane:split({
-		direction = "Right",
-		size = 0.5,
-		cwd = "/Users/clinton/pcode/repos/ContentMeta",
-	})
-	local mypeekaville_tab, mypeekaville_pane =
-		window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/mypeekaville.com/" })
-	mypeekaville_tab:set_title("mypeekaville")
-	mypeekaville_pane:split({
-		direction = "Right",
-		size = 0.5,
-		cwd = "/Users/clinton/pcode/repos/MyPeekavilleUnity-github-lfs",
-	})
+	local aws_scripts_tab = window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/aws-scripts" })
+	aws_scripts_tab:set_title("aws-scripts")
+	local content_meta_tab = window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/ContentMeta" })
+	content_meta_tab:set_title("content-meta")
+	local mypeekaville_tab = window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/mypeekaville.com/" })
+	mypeekaville_tab:set_title("mypeekaville.com")
+	local mypeekaville_unity_tab = window:spawn_tab({ cwd = "/Users/clinton/pcode/repos/mypeekaville-unity" })
+	mypeekaville_unity_tab:set_title("mypeekaville-unity")
 end)
 
 return config
