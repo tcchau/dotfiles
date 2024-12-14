@@ -475,6 +475,13 @@ let g:ale_linters = {
 \   'python': ['black'],
 \}
 let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'javascriptreact': ['prettier'],
+\   'typescriptreact': ['prettier'],
+\   'typescript': ['prettier'],
+\   'css': ['prettier'],
+\   'scss': ['prettier'],
+\   'html': ['prettier'],
 \   'xml': ['xmllint'],
 \   'json': ['fixjson'],
 \   'python': ['black'],
