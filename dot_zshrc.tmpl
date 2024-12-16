@@ -227,16 +227,16 @@ alias add-unmerged="list-unmerged | xargs git add"
 
 alias edit-unmerged="list-unmerged | xargs vim"
 
-{{- if eq .chezmoi.osArch "arm64" }}
+{{ if eq .chezmoi.arch "arm64" }}
 # NVM
 export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-{{- else }}
+{{ else }}
   export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-{{- end }}
+{{ end }}
 # requires higher limit on file handles for model training in python
 ulimit -n 10240
 
