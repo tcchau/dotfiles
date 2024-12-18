@@ -135,7 +135,7 @@ export PATH=$HOME/bin:$PATH
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -299,12 +299,22 @@ export SHFCNDEVUSERPOOL="us-east-1_OXXptQxZt"
 
 # aliases for using different configurations of neovim
 vv() {
-  # Assumes all configs exist in directories named ~/.config/nvim-*
-  local config=$(fd --max-depth 1 --glob 'nvim-*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
- 
+  # Find all nvim-* configs in ~/.config
+  local configs=($(fd --max-depth 1 --glob 'nvim-*' ~/.config))
+
+  # If no nvim-* configs exist, load Neovim with the default config
+  if [[ ${#configs[@]} -eq 0 ]]; then
+    echo "No custom configs found. Loading default Neovim configuration..."
+    nvim "$@"
+    return
+  fi
+
+  # Use fzf to select a config
+  local config=$(printf "%s\n" "${configs[@]}" | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
+
   # If I exit fzf without selecting a config, don't open Neovim
   [[ -z $config ]] && echo "No config selected" && return
- 
+
   # Open Neovim with the selected config
-  NVIM_APPNAME=$(basename $config) nvim $@
+  NVIM_APPNAME=$(basename "$config") nvim "$@"
 }
