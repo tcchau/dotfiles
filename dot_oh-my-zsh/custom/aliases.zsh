@@ -9,4 +9,4 @@ alias jtags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exe
 alias uploaddir='pushd /Users/clinton/pcode/repos/EasyDeploy'
 alias upbase='node upload.js base=/Users/clinton/pcode/repos/Frontend target=test'
 alias upbasemeta='node upload.js base=/Users/clinton/pcode/repos/Frontend meta=/Users/clinton/pcode/repos/ContentMeta target=test'
-
+alias uuidgen='uuidgen | tr "[:upper:]" "[:lower:]"'
