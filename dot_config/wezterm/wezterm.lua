@@ -11,6 +11,7 @@ config.leader = {
 }
 
 config.keys = {
+	--- Activate copy mode
 	{
 		key = "[",
 		mods = "LEADER",
@@ -34,42 +35,55 @@ config.keys = {
 			size = { Percent = 50 },
 		}),
 	},
+	--- Close pane
 	{
-		-- |
+		key = "c",
+		mods = "LEADER",
+		action = act.CloseCurrentPane({ confirm = true }),
+	},
+	--- Swap with active pane
+	{
 		key = "{",
 		mods = "LEADER|SHIFT",
 		action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
 	},
+	--- Go to previous pane
 	{
 		key = ";",
 		mods = "LEADER",
 		action = act.ActivatePaneDirection("Prev"),
 	},
+	--- Go to next pane
 	{
 		key = "o",
 		mods = "LEADER",
 		action = act.ActivatePaneDirection("Next"),
 	},
+	--- Toggle full screen on pane
 	{
 		key = "f",
 		mods = "LEADER",
 		action = wezterm.action.TogglePaneZoomState,
 	},
+	--- Spawn new tab
 	{
 		key = "t",
 		mods = "LEADER",
 		action = act.SpawnTab("CurrentPaneDomain"),
 	},
+	--- Activate next tab
 	{
 		key = "]",
 		mods = "LEADER",
 		action = wezterm.action.ActivateTabRelative(1),
 	},
+	--- Activate previous tab
 	{
 		key = "[",
 		mods = "LEADER",
 		action = wezterm.action.ActivateTabRelative(-1),
 	},
+	--- name tab
 	{
 		key = ",",
 		mods = "LEADER",
@@ -82,6 +96,7 @@ config.keys = {
 			end),
 		}),
 	},
+	--- Activate tab navigator
 	{
 		key = "w",
 		mods = "LEADER",
@@ -167,5 +182,9 @@ config.unix_domains = {
 --	end
 --	window:set_right_status(leader)
 --end)
+
+local merge = require("merge")
+local resurrect = require("resurrect/config")
+config.keys = merge.all(config.keys, resurrect.keys)
 
 return config
