@@ -49,14 +49,14 @@ config.keys = {
 	},
 	--- Go to previous pane
 	{
-		key = ";",
-		mods = "LEADER",
+		key = "<",
+		mods = "LEADER|SHIFT",
 		action = act.ActivatePaneDirection("Prev"),
 	},
 	--- Go to next pane
 	{
-		key = "o",
-		mods = "LEADER",
+		key = ">",
+		mods = "LEADER|SHIFT",
 		action = act.ActivatePaneDirection("Next"),
 	},
 	--- Toggle full screen on pane
@@ -66,11 +66,12 @@ config.keys = {
 		action = wezterm.action.TogglePaneZoomState,
 	},
 	--- Spawn new tab
-	{
-		key = "t",
-		mods = "LEADER",
-		action = act.SpawnTab("CurrentPaneDomain"),
-	},
+	--- already bound to default of CMD-T
+	--- {
+	--- 	key = "t",
+	--- 	mods = "LEADER",
+	--- 	action = act.SpawnTab("CurrentPaneDomain"),
+	--- },
 	--- Activate next tab
 	{
 		key = "]",
@@ -98,7 +99,7 @@ config.keys = {
 	},
 	--- Activate tab navigator
 	{
-		key = "w",
+		key = "t",
 		mods = "LEADER",
 		action = act.ShowTabNavigator,
 	},
@@ -175,6 +176,8 @@ config.unix_domains = {
 		name = "unix",
 	},
 }
+
+-- Turn on indicator leader key
 -- wezterm.on("update-right-status", function(window, pane)
 --	local leader = ""
 --	if window:leader_is_active() then
@@ -186,5 +189,8 @@ config.unix_domains = {
 local merge = require("merge")
 local resurrect = require("resurrect/config")
 config.keys = merge.all(config.keys, resurrect.keys)
+
+local smart_workspace_switcher = require("smart_workspace_switcher/config")
+config.keys = merge.all(config.keys, smart_workspace_switcher.keys)
 
 return config
