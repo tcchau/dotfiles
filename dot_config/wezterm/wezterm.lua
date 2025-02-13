@@ -13,8 +13,8 @@ config.leader = {
 config.keys = {
 	--- Activate copy mode
 	{
-		key = "[",
-		mods = "LEADER",
+		key = "?",
+		mods = "LEADER|SHIFT",
 		action = wezterm.action.ActivateCopyMode,
 	},
 	--- Vertical split

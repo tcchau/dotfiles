@@ -101,6 +101,8 @@ config.keys = {
 	},
 }
 
+wezterm.on("gui-startup", resurrect.resurrect_on_gui_startup)
+
 require("resurrect/events")
 
 return config
