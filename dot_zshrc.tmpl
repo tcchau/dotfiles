@@ -318,3 +318,6 @@ vv() {
   # Open Neovim with the selected config
   NVIM_APPNAME=$(basename "$config") nvim "$@"
 }
+
+# initialize zoxide
+eval "$(zoxide init zsh)"
