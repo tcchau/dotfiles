@@ -9,4 +9,5 @@ alias jtags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exe
 alias uuidgen='uuidgen | tr "[:upper:]" "[:lower:]"'
 alias cmadd='chezmoi add'
 alias cme='chezmoi edit'
+alias cmea='chezmoi edit --apply'
 alias cma='chezmoi apply'
