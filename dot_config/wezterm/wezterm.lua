@@ -152,7 +152,7 @@ config.colors = {
 		active_tab = {
 			-- I use a solarized dark theme; this gives a teal background to the active tab
 			fg_color = "#073642",
-			bg_color = "#2aa198",
+			bg_color = "#7aa2f7",
 		},
 	},
 }
@@ -161,7 +161,7 @@ config.colors = {
 config.switch_to_last_active_tab_when_closing_tab = true
 
 config.pane_focus_follows_mouse = true
-config.scrollback_lines = 5000
+-- config.scrollback_lines = 5000
 
 -- I don't really have need for padding between panes
 config.window_padding = {
@@ -176,6 +176,23 @@ config.unix_domains = {
 		name = "unix",
 	},
 }
+
+local opacity = 0.6
+
+wezterm.on("window-focus-changed", function(window, _pane)
+	local overrides = window:get_config_overrides() or {}
+
+	if window:is_focused() then
+		overrides.window_background_opacity = 1
+	else
+		overrides.window_background_opacity = opacity
+	end
+
+	window:set_config_overrides(overrides)
+end)
+
+config.window_background_opacity = opacity
+config.macos_window_background_blur = 20
 
 -- Turn on indicator leader key
 -- wezterm.on("update-right-status", function(window, pane)
