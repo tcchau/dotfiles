@@ -7,5 +7,6 @@ alias lap='CLICOLOR_FORCE=1 ls -lAh | less -R --clear-screen --quit-if-one-scree
 alias lup='CLICOLOR_FORCE=1 ls -lruh | less -R --clear-screen --quit-if-one-screen'
 alias jtags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
 alias uuidgen='uuidgen | tr "[:upper:]" "[:lower:]"'
+alias cmadd='chezmoi add'
 alias cme='chezmoi edit'
 alias cma='chezmoi apply'
