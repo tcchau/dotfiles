@@ -29,6 +29,7 @@ bar=(
     padding_left="$BAR_PADDING"
     padding_right="$BAR_PADDING"
     y_offset="$BAR_Y_OFFSET"
+    border_width="$BAR_BORDER_WIDTH"
 )
 sketchybar --bar "${bar[@]}"
 
@@ -60,8 +61,8 @@ sketchybar --default "${default[@]}"
 # only the properties deviating from the current defaults need to be set
  
 ##### Adding Left Items #####
-source "$ITEM_DIR/aerospace"
 source "$ITEM_DIR/spacer"
+source "$ITEM_DIR/aerospace"
 source "$ITEM_DIR/front_app"
 
 ##### Adding Right Items #####
