@@ -54,6 +54,9 @@ default-root-container-orientation = 'auto'
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
+# this seems to be buggy
+# on-focus-changed = ['move-mouse window-lazy-center']
+
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodness#disable-hide-app
@@ -72,16 +75,21 @@ preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 4 
-inner.vertical =   4
-outer.right =       4
-outer.bottom =     4
-outer.top =      0
-outer.left =        [{monitor."U4924DW" = 88}, {monitor."Retina" = 88}, 4]
+inner.horizontal = 8 
+inner.vertical =  8 
+outer.right =       8
+outer.bottom =     8
+outer.top =      8
+outer.left =        [{monitor."U4924DW" = 88}, {monitor."Retina" = 88}, 8]
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'                       # Main monitor
 A = ['secondary', 'LU28R55']
+
+[[on-window-detected]]
+# This section allows you to run commands when a window is detected.
+  if.app-id = 'com.DanPristupov.Fork'
+  run = ['layout floating']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -215,6 +223,8 @@ alt-shift-semicolon = [
   
 # Clinton's own custom bindings
 cmd-shift-enter = 'fullscreen'
+cmd-h = 'move-node-to-workspace X'
+cmd-alt-h = 'fullscreen'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
