@@ -42,3 +42,6 @@ lg = !"git lg1"
 	prompt = false
 [status]
 	submoduleSummary = true
+
+[pull]
+	ff = true
