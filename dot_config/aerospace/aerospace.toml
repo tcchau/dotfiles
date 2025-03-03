@@ -80,7 +80,7 @@ inner.vertical =  8
 outer.right =       8
 outer.bottom =     8
 outer.top =      8
-outer.left =        [{monitor."U4924DW" = 88}, {monitor."Retina" = 88}, 8]
+outer.left =        [{monitor."U4924DW" = 88}, {monitor."Retina" = 88}, {monitor."LU28R55" = 88}, 8]
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'                       # Main monitor
