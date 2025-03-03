@@ -32,9 +32,6 @@ lg = !"git lg1"
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
 	prompt = false
-[merge]
-	tool = Kaleidoscope
-	ff = false
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
@@ -42,6 +39,7 @@ lg = !"git lg1"
 	prompt = false
 [status]
 	submoduleSummary = true
-
+[merge]
+	ff = false
 [pull]
 	ff = true
