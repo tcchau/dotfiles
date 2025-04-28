@@ -204,10 +204,10 @@ config.macos_window_background_blur = 20
 --end)
 
 local merge = require("merge")
-local resurrect = require("resurrect/config")
-config.keys = merge.all(config.keys, resurrect.keys)
+--local resurrect = require("resurrect/config")
+--config.keys = merge.all(config.keys, resurrect.keys)
 
-local smart_workspace_switcher = require("smart_workspace_switcher/config")
-config.keys = merge.all(config.keys, smart_workspace_switcher.keys)
+--local smart_workspace_switcher = require("smart_workspace_switcher/config")
+--config.keys = merge.all(config.keys, smart_workspace_switcher.keys)
 
 return config
