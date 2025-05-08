@@ -44,10 +44,25 @@ return {
   -- but I am enabling it
   {
     "max397574/better-escape.nvim",
-    opts = {
-      mapping = { "jj" }, -- set your insert mode escape mapping here
-      -- optional: timeout = 300,
-    },
+    config = function()
+      require("better_escape").setup {
+        -- Optional: set your preferred timeout (in ms)
+        timeout = vim.o.timeoutlen,
+        -- Optional: disable all default mappings if you want only your own
+        -- default_mappings = false,
+        mappings = {
+          i = { -- insert mode
+            j = {
+              j = "<Esc>", -- 'jj' escapes insert mode
+              k = "<Esc>", -- 'jk' escapes insert mode (optional)
+            },
+            -- You can add more custom combos if desired:
+            -- k = { j = "<Esc>" }, -- 'kj' escapes insert mode
+          },
+        },
+      }
+    end,
+    event = "InsertEnter", -- lazy-load on entering insert mode
   },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
