@@ -191,8 +191,19 @@ export LESS="-F -E -X $LESS"
 
 # turn off autopushd so that we use the dir stack manually
 unsetopt autopushd
-unsetopt inc_append_history
-unsetopt share_history
+#unsetopt inc_append_history
+#unsetopt share_history
+
+# story history in a file
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
+setopt inc_append_history
+setopt inc_append_history_time
 
 alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
 alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
