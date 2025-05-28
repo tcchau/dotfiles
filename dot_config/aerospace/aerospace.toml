@@ -89,7 +89,59 @@ A = ['secondary', 'LU28R55']
 [[on-window-detected]]
 # This section allows you to run commands when a window is detected.
   if.app-id = 'com.DanPristupov.Fork'
-  run = ['layout floating']
+  run = ['layout tiling']
+
+[[on-window-detected]]
+  if.app-id = 'com.unity3d.UnityEditor5.x'
+  run = ['move-node-to-workspace U']
+
+[[on-window-detected]]
+  if.app-id = 'com.tinyspeck.slackmacgap'
+  run = ['move-node-to-workspace M']
+
+[[on-window-detected]]
+  if.app-id = 'io.zsa.keymapp'
+  run = ['move-node-to-workspace A']
+
+[[on-window-detected]]
+  if.app-id = 'net.whatsapp.WhatsApp'
+  run = ['move-node-to-workspace M']
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.Music'
+  run = ['move-node-to-workspace O']
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.MobileSMS'
+  run = ['move-node-to-workspace M']
+
+[[on-window-detected]]
+  if.app-id = 'com.unity3d.unityhub'
+  run = ['move-node-to-workspace U']
+
+[[on-window-detected]]
+  if.app-id = 'com.bitwarden.desktop'
+  run = ['move-node-to-workspace F']
+
+[[on-window-detected]]
+  if.app-id = 'com.fujitsu.pfu.SshResident'
+  run = ['move-node-to-workspace S']
+
+[[on-window-detected]]
+  if.app-id = 'ch.protonvpn.mac'
+  run = ['move-node-to-workspace V']
+
+[[on-window-detected]]
+  if.app-id = 'com.evernote.Evernote'
+  run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+  if.app-id = 'com.todoist.mac.Todoist'
+  run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.dt.Xcode'
+  run = ['move-node-to-workspace U']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

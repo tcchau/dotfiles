@@ -260,6 +260,7 @@ ulimit -n 10240
 
 # plain mode without plugins
 alias vi="vim -u NONE"
+source <(fzf --zsh)
 
 #####
 ##### Platform-specific changes
@@ -339,3 +340,25 @@ vv() {
 
 # initialize zoxide
 eval "$(zoxide init zsh)"
+
+# add node binary path to PATH if in a node project directory
+function update_node_path() {
+  # Remove existing node_modules/.bin entries
+  PATH=$(echo $PATH | tr ':' '\n' | grep -v "node_modules/\.bin" | tr '\n' ':' | sed 's/:$//')
+
+  # Collect all node_modules/.bin paths from current dir up to root
+  local current_dir=$PWD
+  while [[ "$current_dir" != "/" ]]; do
+    local bin_path="$current_dir/node_modules/.bin"
+    if [[ -d "$bin_path" ]]; then
+      PATH="$bin_path:$PATH"  # Closest directories get priority
+    fi
+    current_dir=$(dirname "$current_dir")
+  done
+
+  export PATH
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd update_node_path
+update_node_path  # Run on shell startup
