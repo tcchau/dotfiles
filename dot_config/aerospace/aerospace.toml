@@ -84,7 +84,7 @@ outer.left =        [{monitor."U4924DW" = 88}, {monitor."Retina" = 88}, {monitor
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'                       # Main monitor
-A = ['secondary', 'LU28R55']
+A = ['^built-in retina display$', 'secondary', 'LU28R55']
 
 [[on-window-detected]]
 # This section allows you to run commands when a window is detected.
@@ -133,6 +133,10 @@ A = ['secondary', 'LU28R55']
 
 [[on-window-detected]]
   if.app-id = 'com.evernote.Evernote'
+  run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+  if.app-id = 'com.todoist.mac.Todoist'
   run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
