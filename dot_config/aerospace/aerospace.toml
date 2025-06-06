@@ -109,7 +109,7 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
 
 [[on-window-detected]]
   if.app-id = 'com.apple.Music'
-  run = ['move-node-to-workspace O']
+  run = ['move-node-to-workspace M']
 
 [[on-window-detected]]
   if.app-id = 'com.apple.MobileSMS'
@@ -146,6 +146,10 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
 [[on-window-detected]]
   if.app-id = 'com.apple.dt.Xcode'
   run = ['move-node-to-workspace U']
+
+[[on-window-detected]]
+  if.window-title-regex-substring = 'Unity'
+  run = 'layout tiles horizontal vertical'
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
