@@ -55,7 +55,7 @@ default-root-container-orientation = 'auto'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # this seems to be buggy
-# on-focus-changed = ['move-mouse window-lazy-center']
+on-focus-changed = ['move-mouse window-lazy-center']
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
@@ -149,7 +149,7 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
 
 [[on-window-detected]]
   if.window-title-regex-substring = 'Unity'
-  run = 'layout tiles horizontal vertical'
+  run = 'layout tiling'
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
