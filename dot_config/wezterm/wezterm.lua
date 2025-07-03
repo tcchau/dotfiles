@@ -146,7 +146,7 @@ config.keys = {
 config.use_fancy_tab_bar = true
 
 -- Don't let any individual tab name take too much room
-config.tab_max_width = 32
+config.tab_max_width = 50
 config.colors = {
 	tab_bar = {
 		active_tab = {
@@ -161,7 +161,7 @@ config.colors = {
 config.switch_to_last_active_tab_when_closing_tab = true
 
 config.pane_focus_follows_mouse = true
--- config.scrollback_lines = 5000
+config.scrollback_lines = 50000
 
 -- I don't really have need for padding between panes
 config.window_padding = {
