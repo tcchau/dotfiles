@@ -13,13 +13,17 @@ return {
       "css-lsp",
       "html-lsp",
       "json-lsp",
+      "pyright", -- Python LSP
+      "lua-language-server", -- Lua LSP
       
       -- Formatters
       "prettier",
+      "black", -- Python formatter
+      "stylua", -- Lua formatter
+      "markdownlint-cli2", -- Markdown linter/formatter
       
-      -- Additional tools you want
-      "pyright", -- if you work with Python
-      -- Add more tools as needed
+      -- Linters
+      "ruff", -- Python linter/formatter
     })
   end,
 }

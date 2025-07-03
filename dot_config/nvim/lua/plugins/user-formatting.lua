@@ -31,6 +31,8 @@ return {
       yaml = { "prettier" },
       markdown = { "prettier" },
       graphql = { "prettier" },
+      python = { "black" },
+      lua = { "stylua" },
     },
     format_on_save = {
       timeout_ms = 500,
@@ -51,6 +53,11 @@ return {
         args = { "--stdin-filepath", "$FILENAME" },
         stdin = true,
         -- Working directory will be automatically detected by prettier
+      },
+      ["markdownlint-cli2"] = {
+        command = "markdownlint-cli2",
+        args = { "--fix", "$FILENAME" },
+        stdin = false,
       },
     },
   },
