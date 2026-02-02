@@ -4,6 +4,8 @@ local mux = wezterm.mux
 local config = wezterm.config_builder()
 local act = wezterm.action
 
+config.debug_key_events = true
+
 config.leader = {
 	key = "\\",
 	mods = "CTRL",
@@ -50,13 +52,13 @@ config.keys = {
 	--- Go to previous pane
 	{
 		key = "<",
-		mods = "LEADER|SHIFT",
+		mods = "CMD|SHIFT",
 		action = act.ActivatePaneDirection("Prev"),
 	},
 	--- Go to next pane
 	{
 		key = ">",
-		mods = "LEADER|SHIFT",
+		mods = "CMD|SHIFT",
 		action = act.ActivatePaneDirection("Next"),
 	},
 	--- Toggle full screen on pane
@@ -177,7 +179,7 @@ config.unix_domains = {
 	},
 }
 
-local opacity = 0.6
+local opacity = 0.9
 
 wezterm.on("window-focus-changed", function(window, _pane)
 	local overrides = window:get_config_overrides() or {}

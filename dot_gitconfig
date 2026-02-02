@@ -27,6 +27,7 @@ lg = !"git lg1"
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [diff]
+	ignoreAllSpace = true
 	tool = Kaleidoscope
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"

@@ -8,6 +8,7 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.html-css" },
+  { import = "astrocommunity.completion.copilot-lua-cmp" },
   
   -- Import other community plugins you want
   -- { import = "astrocommunity.colorscheme.catppuccin" },

@@ -196,8 +196,8 @@ unsetopt autopushd
 
 # story history in a file
 HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
+export HISTSIZE=10000
+export SAVEHIST=10000
 setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
@@ -315,6 +315,8 @@ export SHFCNPRODSERVER="E2H3KFPE4RR29K"
 export SHFCNBUNDLESERVER="E3CLVRNS82V2IW"
 export SHFCNPRODUSERPOOL="us-east-1_FJFi3AIyn"
 export SHFCNDEVUSERPOOL="us-east-1_OXXptQxZt"
+export SHFCNPRODUSERPOOLUAE="me-central-1_eLjP0HgCk"
+export SHFCNDEVUSERPOOLUAE="me-central-1_KlULBcnaV"
 
 # aliases for using different configurations of neovim
 vv() {
@@ -362,3 +364,6 @@ function update_node_path() {
 autoload -U add-zsh-hook
 add-zsh-hook chpwd update_node_path
 update_node_path  # Run on shell startup
+
+# Cargo execution path
+export PATH=$HOME/.cargo/bin:$PATH

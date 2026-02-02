@@ -11,7 +11,7 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
   'exec-and-forget sketchybar',
-  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=15.0'
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=10.0'
 ]
 
 # Notify Sketchybar about workspace change
@@ -102,6 +102,10 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
 [[on-window-detected]]
   if.app-id = 'io.zsa.keymapp'
   run = ['move-node-to-workspace A']
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.Music'
+  run = ['move-node-to-workspace M']
 
 [[on-window-detected]]
   if.app-id = 'net.whatsapp.WhatsApp'
