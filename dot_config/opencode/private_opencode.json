@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "models": {
+        "qwen3-coder-next:q4_K_M": {
+          "limit": {
+            "context": 16000,
+            "output": 2048
+          },
+          "name": "qwen3-coder-next:q4_K_M"
+        },
+        "phi4-mini:latest": {
+          "name": "phi4-mini:latest",
+          "limit": {
+            "context": 16000,
+            "output": 2048
+          }
+        },
+        "glm-4.7-flash:q4_K_M": {
+          "name": "glm-4.7-flash:q4_K_M"
+        }
+      },
+      "name": "Ollama (local)",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      }
+    }
+  }
+}
