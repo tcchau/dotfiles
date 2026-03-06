@@ -27,5 +27,14 @@
         "baseURL": "http://localhost:11434/v1"
       }
     }
+  },
+  "mcp": {
+    "youtube-transcript": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@fabriqa.ai/youtube-transcript-mcp@latest"
+      ]
+    }
   }
 }
