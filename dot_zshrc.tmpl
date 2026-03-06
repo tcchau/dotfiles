@@ -19,16 +19,6 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="jonathan"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -92,8 +82,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git zsh-syntax-highlighting vi-mode)
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -110,15 +98,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname- m)"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #############################################
 ###
@@ -146,14 +125,6 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 ################################################################################
 #
 # My own customizations
@@ -205,12 +176,6 @@ setopt hist_verify
 setopt inc_append_history
 setopt inc_append_history_time
 
-alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
-alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
-alias gitpruneremote="git remote prune origin"
-alias sls="../mysls.sh"
-alias gitlastlog="git log -1 --pretty=%B"
-
 function gitchangelog() {
   if [[ -n $1 ]] ; then
     git log --grep="Merge branch" $1..HEAD
@@ -260,10 +225,6 @@ list-wezterm-panes() {
 }
 
 
-alias add-unmerged="list-unmerged | xargs git add"
-
-alias edit-unmerged="list-unmerged | xargs vim"
-
 {{ if eq .chezmoi.arch "arm64" }}
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -277,8 +238,6 @@ export NVM_DIR="$HOME/.nvm"
 # requires higher limit on file handles for model training in python
 ulimit -n 10240
 
-# plain mode without plugins
-alias vi="vim -u NONE"
 source <(fzf --zsh)
 
 #####
@@ -338,7 +297,7 @@ export SHFCNDEVUSERPOOL="us-east-1_OXXptQxZt"
 export SHFCNPRODUSERPOOLUAE="me-central-1_eLjP0HgCk"
 export SHFCNDEVUSERPOOLUAE="me-central-1_KlULBcnaV"
 
-# aliases for using different configurations of neovim
+# function for using different configurations of neovim
 vv() {
   # Find all nvim-* configs in ~/.config
   local configs=($(fd --max-depth 1 --glob 'nvim-*' ~/.config))
@@ -387,3 +346,37 @@ update_node_path  # Run on shell startup
 
 # Cargo execution path
 export PATH=$HOME/.cargo/bin:$PATH
+
+
+################################################################################
+#
+# My own aliases
+#
+################################################################################
+alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
+alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
+alias gitpruneremote="git remote prune origin"
+alias sls="../mysls.sh"
+alias gitlastlog="git log -1 --pretty=%B"
+alias add-unmerged="list-unmerged | xargs git add"
+
+alias edit-unmerged="list-unmerged | xargs vim"
+# plain mode without plugins
+alias vi="nvim -u NONE"
+alias l='eza -lh'
+alias la='eza -lah'
+alias lu='eza -lruh'
+alias llp='eza -lh | less -R --clear-screen --quit-if-one-screen'
+alias lap='eza -lAh | less -R --clear-screen --quit-if-one-screen'
+alias lup='eza -lruh | less -R --clear-screen --quit-if-one-screen'
+alias jtags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
+alias uuidgen='uuidgen | tr "[:upper:]" "[:lower:]"'
+alias cmadd='chezmoi add'
+alias cmreadd='chezmoi re-add'
+alias cme='chezmoi edit'
+alias cmea='chezmoi edit --apply'
+alias cma='chezmoi apply'
+alias gupuae="USER_REGION=uae STAGE=prod ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2Ru9sKP2j3HhKhG/GsD3/nK8TYm8=' tsx user-ops/getUserProfile2.ts --production "
+alias gupus="USER_REGION=us STAGE=prod ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2Ru9sKP2j3HhKhG/GsD3/nK8TYm8=' tsx user-ops/getUserProfile2.ts --production "
+alias gupuaedev="USER_REGION=uae STAGE=dev ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2Ru9sKP2j3HhKhG/GsD3/nK8TYm8=' tsx user-ops/getUserProfile2.ts "
+alias gupusdev="USER_REGION=us STAGE=dev ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2Ru9sKP2j3HhKhG/GsD3/nK8TYm8=' tsx user-ops/getUserProfile2.ts "
