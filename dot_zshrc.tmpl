@@ -241,6 +241,25 @@ function list-unmerged {
   git ls-files --unmerged | cut -f2 | sort -u ;
 }
 
+# List opencode processes with port + cwd
+list-opencodes() {
+  local pids port cwd start
+  pids=($(pgrep -f "opencode.*--port" 2>/dev/null))
+  (( ${#pids[@]} )) || { echo "No opencode --port processes"; return; }
+  for pid in "${pids[@]}"; do
+    port=$(lsof -w -iTCP -sTCP:LISTEN -P -n -a -p "$pid" 2>/dev/null | awk 'NR>1{split($9,a,":");print a[length(a)]; exit}')
+    cwd=$(lsof -p "$pid" 2>/dev/null | awk '$4=="cwd"{print $9; exit}')
+    start=$(ps -o lstart= -p "$pid")
+    printf "%-6s port=%-6s cwd=%-50s start=%s\n" "$pid" "${port:-?}" "${cwd:-?}" "$start"
+  done
+}
+
+# 2) Check if a WezTerm pane still references it (fast heuristic: pane CWD match)
+list-wezterm-panes() {
+  wezterm cli list --format json 2>/dev/null | jq -r '.[] | "\(.pane_id)\t\(.cwd)\t\(.title)"'
+}
+
+
 alias add-unmerged="list-unmerged | xargs git add"
 
 alias edit-unmerged="list-unmerged | xargs vim"
