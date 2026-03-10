@@ -378,9 +378,6 @@ autoload -U add-zsh-hook
 add-zsh-hook chpwd update_node_path
 update_node_path  # Run on shell startup
 
-# Cargo execution path
-export PATH=$HOME/.cargo/bin:$PATH
-
 # starshikp startup
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 eval "$(starship init zsh)"
