@@ -1,9 +1,6 @@
 ################################################################################
 #
 # My own customizations
-# stty commands have to precede the p10k instant prompt
-# to avoid warnings about instant prompt errors if there is console i/o after
-# powerlevel10k is loaded.
 #
 ################################################################################
 stty -ixon
@@ -302,11 +299,20 @@ update_node_path  # Run on shell startup
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 eval "$(starship init zsh)"
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 #######
 # autocomplete configuration
 #######
-# Case-insensitive completion
+source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Case-insensitive completion# Load plugins
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+###
+# brew path for linux
+###
+if [[ "$(uname)" == "Linux" ]]; then
+    # Your Linux/Zorin-specific commands here
+    alias update="sudo apt update && sudo apt upgrade"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
