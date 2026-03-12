@@ -37,7 +37,8 @@ alias add-unmerged="list-unmerged | xargs git add"
 alias edit-unmerged="list-unmerged | xargs vim"
 # plain mode without plugins
 alias vi="nvim -u NONE"
-alias l='eza -lh'
+alias l="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
 alias la='eza -lah'
 alias lu='eza -lruh'
 alias llp='eza -lh | less -R --clear-screen --quit-if-one-screen'
@@ -106,7 +107,7 @@ DEFAULT_USER="clinton"
 # New bind keys
 INSERT_MODE_INDICATOR="%F{yellow}+%f"
 NORMAL_MODE_INDICATOR="%F{green}*%f"
-bindkey -M viins 'jj' vi-cmd-mode
+bindkey -M viins 'jk' vi-cmd-mode
 
 # my environment variables
 export LESS="-F -E -X $LESS"
@@ -176,64 +177,6 @@ list-wezterm-panes() {
 }
 
 
-{{ if (and (eq .chezmoi.arch "arm64") (eq .chezmoi.os "darwin")) }}
-# NVM
-export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-{{ else if (and (eq .chezmoi.arch "x64") (eq .chezmoi.os "darwin")) }}
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-{{ else if eq .chezmoi.os "linux" }}
-    export NVM_DIR="$HOME/.nvm"
-  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-{{ end }}
-# requires higher limit on file handles for model training in python
-ulimit -n 10240
-
-source <(fzf --zsh)
-
-#####
-##### Platform-specific changes
-#####
-if [[ $(uname) == "Darwin" ]]; then
-  ### FZF stuff
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  export FZF_DEFAULT_COMMAND='fd --type f --follow'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-  export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
-
-  # for jenv, java runtime version manager
-  # export PATH="/usr/local/bin:/usr/local/opt:./node_modules/.bin:$PATH"
-  # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-  # export PATH="$HOME/.jenv/bin:$PATH"
-  # eval "$(jenv init -)"
-
-  #
-  # tabtab source for serverless package
-  # uninstall by removing these lines or running `tabtab uninstall serverless`
-  [[ -f /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/clinton/.nvm/versions/node/v8.1.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-  # tabtab source for sls package
-  # uninstall by removing these lines or running `tabtab uninstall sls`
-  [[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
-
-fi
-
-# install path for Deno if directory exists
-if [[ -d "$HOME/.deno/bin" ]]; then
-  export DENO_INSTALL="/Users/clinton/.deno"
-  export PATH="$DENO_INSTALL/bin:$PATH"
-fi
-
-# pyenv initialization
-eval "$(pyenv init -)"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # shorthand for cryptic names
 export SHFCNMYPTEST="E2PI9QSGISSB91"
 export SHFCNMYPPROD="E28PRN526W4NUH"
@@ -270,9 +213,6 @@ vv() {
   NVIM_APPNAME=$(basename "$config") nvim "$@"
 }
 
-# initialize zoxide
-eval "$(zoxide init zsh)"
-
 # add node binary path to PATH if in a node project directory
 function update_node_path() {
   # Remove existing node_modules/.bin entries
@@ -291,13 +231,13 @@ function update_node_path() {
   export PATH
 }
 
-autoload -U add-zsh-hook
-add-zsh-hook chpwd update_node_path
-update_node_path  # Run on shell startup
 
-# starship startup
-export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-eval "$(starship init zsh)"
+
+###########################
+# 
+# intialize tools and utilities
+#
+###########################
 
 #######
 # autocomplete configuration
@@ -307,6 +247,64 @@ source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-h
 
 # Case-insensitive completion# Load plugins
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+#####
+##### Platform-specific changes
+#####
+if [[ $(uname) =~ ^(Darwin|Linux)$ ]]; then
+  ### FZF stuff
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  export FZF_DEFAULT_COMMAND='fd --type f --follow'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_CTRL_R_COMMAND='' # disable default ctrl-r history for atuin
+fi
+
+# fzf configuration
+source <(fzf --zsh)
+
+# pyenv initialization
+eval "$(pyenv init -)"
+# requires higher limit on file handles for model training in python
+ulimit -n 10240
+
+# initialize zoxide
+eval "$(zoxide init zsh)"
+
+# starship startup
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+eval "$(starship init zsh)"
+
+# atuin set up
+eval "$(atuin init zsh)" 
+
+{{ if (and (eq .chezmoi.arch "arm64") (eq .chezmoi.os "darwin")) }}
+# NVM path setup on a per operating system and architecture basis
+export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+{{ else if (and (eq .chezmoi.arch "x64") (eq .chezmoi.os "darwin")) }}
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+{{ else if eq .chezmoi.os "linux" }}
+    export NVM_DIR="$HOME/.nvm"
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+{{ end }}
+
+# Automatically adds node_modules/.bin directories to your PATH whenever you
+# change directories, so locally installed tools like eslint or vite are used
+# instead of global versions. It walks up the directory tree so monorepos are
+# handled correctly, with nested packages taking priority.
+autoload -U add-zsh-hook
+add-zsh-hook chpwd update_node_path
+update_node_path  # Run on shell startup
+
+# install path for Deno if directory exists
+if [[ -d "$HOME/.deno/bin" ]]; then
+  export DENO_INSTALL="/Users/clinton/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
 
 ###
 # Linux-specific setup
