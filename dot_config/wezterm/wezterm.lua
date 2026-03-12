@@ -4,6 +4,10 @@ local mux = wezterm.mux
 local config = wezterm.config_builder()
 local act = wezterm.action
 
+if wezterm.target_triple:find('linux') then
+  config.enable_wayland = false
+end
+
 config.debug_key_events = true
 
 -- config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })

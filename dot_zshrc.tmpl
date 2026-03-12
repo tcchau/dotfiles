@@ -176,15 +176,19 @@ list-wezterm-panes() {
 }
 
 
-{{ if eq .chezmoi.arch "arm64" }}
+{{ if (and (eq .chezmoi.arch "arm64") (eq .chezmoi.os "darwin")) }}
 # NVM
 export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-{{ else }}
+{{ else if (and (eq .chezmoi.arch "x64") (eq .chezmoi.os "darwin")) }}
   export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+{{ else if eq .chezmoi.os "linux" }}
+    export NVM_DIR="$HOME/.nvm"
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 {{ end }}
 # requires higher limit on file handles for model training in python
 ulimit -n 10240
@@ -216,10 +220,6 @@ if [[ $(uname) == "Darwin" ]]; then
   # uninstall by removing these lines or running `tabtab uninstall sls`
   [[ -f /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/GitRepositories/Peekapak/MicroServices/node_modules/tabtab/.completions/sls.zsh
 
-fi
-
-if [[ $(uname) == "Linux" ]]; then
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
 
 # install path for Deno if directory exists
@@ -309,10 +309,13 @@ source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-h
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ###
-# brew path for linux
+# Linux-specific setup
 ###
 if [[ "$(uname)" == "Linux" ]]; then
     # Your Linux/Zorin-specific commands here
+    echo Setting up brew path
     alias update="sudo apt update && sudo apt upgrade"
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+    export WAYLAND_DISPLAY=
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
