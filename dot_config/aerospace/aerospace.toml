@@ -77,20 +77,10 @@ preset = 'qwerty'
 [gaps]
 inner.horizontal = 8 
 inner.vertical =  8 
-outer.right =     [
-                      {monitor."U4924DW" = 88}, 
-                      {monitor."Retina" = 20}, 
-                      {monitor."LU28R55" = 88}, 
-                      8
-                  ] 
-outer.bottom =     8
-outer.top =        8
-outer.left =      [ 
-                      {monitor."U4924DW" = 88}, 
-                      {monitor."Retina" = 20}, 
-                      {monitor."LU28R55" = 88}, 
-                      8
-                  ]
+outer.right =     8
+outer.bottom =    8
+outer.top =       8
+outer.left =      88 # leave room for the skeytchybar on the left
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'                       # Main monitor
@@ -154,10 +144,6 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
   run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-  if.app-id = 'com.todoist.mac.Todoist'
-  run = ['move-node-to-workspace 2']
-
-[[on-window-detected]]
   if.app-id = 'com.apple.dt.Xcode'
   run = ['move-node-to-workspace U']
 
@@ -165,6 +151,54 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
   if.window-title-regex-substring = 'Unity'
   run = 'layout tiling'
 
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'AWS'
+  run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'Bills'
+  run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'Calendar'
+  run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'Open Brain'
+  run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'Peekapak'
+  run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'Personal'
+  run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'Working'
+  run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+  if.app-id = 'com.microsoft.edgemac'
+  if.window-title-regex-substring = 'windsongs'
+  run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+  if.app-id = 'md.obsidian'
+  run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+  if.app-id = 'com.docker.docker'
+  if.window-title-regex-substring = 'C'
+  run = 'move-node-to-workspace P'
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented

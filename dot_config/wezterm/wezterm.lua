@@ -6,8 +6,18 @@ local act = wezterm.action
 
 config.debug_key_events = true
 
-config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
-config.font_size = 12.0
+-- config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
+config.font_size = 15
+
+function scheme_for_appearance(appearance)
+  if appearance:find "Dark" then
+    return "Catppuccin Mocha"
+  else
+    return "Catppuccin Latte"
+  end
+end
+
+config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.leader = {
 	key = "\\",
