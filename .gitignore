@@ -1,1 +1,14 @@
 *.swp
+dot_config/aerospace/bin/
+dot_config/nvim/dot_luarc.json
+dot_config/nvim/lazy-lock.json
+dot_config/nvim/lua/community.lua
+dot_config/nvim/lua/lazy_setup.lua
+dot_config/nvim/lua/plugins/astrocore.lua
+dot_config/nvim/lua/plugins/astrolsp.lua
+dot_config/nvim/lua/plugins/astroui.lua
+dot_config/nvim/lua/plugins/mason.lua
+dot_config/nvim/lua/plugins/none-ls.lua
+dot_config/nvim/lua/plugins/treesitter.lua
+dot_config/nvim/lua/plugins/user.lua
+dot_config/nvim/lua/polish.lua
