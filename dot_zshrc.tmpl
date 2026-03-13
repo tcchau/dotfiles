@@ -41,9 +41,9 @@ alias l="eza -l --icons --git -a"
 alias lt="eza --tree --level=2 --long --icons --git"
 alias la='eza -lah'
 alias lu='eza -lruh'
-alias llp='eza -lh | less -R --clear-screen --quit-if-one-screen'
-alias lap='eza -lAh | less -R --clear-screen --quit-if-one-screen'
-alias lup='eza -lruh | less -R --clear-screen --quit-if-one-screen'
+alias llp='eza -lh --color=always | less -R --clear-screen --quit-if-one-screen'
+alias lap='eza -lAh --color=always | less -R --clear-screen --quit-if-one-screen'
+alias lup='eza -lruh --color=always | less -R --clear-screen --quit-if-one-screen'
 alias jtags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
 alias uuidgen='uuidgen | tr "[:upper:]" "[:lower:]"'
 alias cmadd='chezmoi add'
