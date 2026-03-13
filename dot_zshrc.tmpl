@@ -1,32 +1,40 @@
-################################################################################
+#################################################################
 #
-# My own customizations
+# Linux-specific setup
+# This needs to occur early to establish path to 
+# execute homebrew-installed apps
 #
-################################################################################
+#################################################################
+if [[ "$(uname)" == "Linux" ]]; then
+    # Your Linux/Zorin-specific commands here
+    echo Setting up brew path
+    alias update="sudo apt update && sudo apt upgrade"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+    export WAYLAND_DISPLAY=
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
+
+#################################################################
+#
+# zsh options
+#
+#################################################################
+
+# disable terminal flow control key bindings
 stty -ixon
+
+# vi-mode on command line
 set -o vi
+
+# auto cd by typing name
 setopt autocd
 
-plugins=(git zsh-syntax-highlighting vi-mode)
+# set language
+export LANG=en_US.UTF-8
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-#############################################
-###
-### my custom sections
-###
-#############################################
-
-################################################################################
 #
-# My own aliases
+# aliases
 #
-################################################################################
 alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
 alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
 alias gitpruneremote="git remote prune origin"
@@ -37,7 +45,8 @@ alias add-unmerged="list-unmerged | xargs git add"
 alias edit-unmerged="list-unmerged | xargs vim"
 # plain mode without plugins
 alias vi="nvim -u NONE"
-alias l="eza -l --icons --git -a"
+alias l='eza -l --icons --git -a'
+alias lw='eza -G'
 alias lt="eza --tree --level=2 --long --icons --git"
 alias la='eza -lah'
 alias lu='eza -lruh'
@@ -58,16 +67,13 @@ alias gupusdev="USER_REGION=us STAGE=dev ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2
 
 ################################################################################
 #
-# Other customizations
+# Other zsh customizations
 #
 ################################################################################
 
-# User configuration
+# path configurations
 
-# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$HOME/bin:$PATH
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -76,108 +82,19 @@ else
   export EDITOR='nvim'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export SSH_KEY_PATH="~/.ssh/id_ed25519"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-DEFAULT_USER="clinton"
-
-# VIM key bindings for command line editing
-# bindkey -v
-# 
-# bindkey '^P' up-history
-# bindkey '^N' down-history
-# bindkey '^?' backward-delete-char
-# bindkey '^h' backward-delete-char
-# bindkey '^w' backward-kill-word
-# bindkey '^r' history-incremental-search-backward
-# 
-# function zle-line-init zle-keymap-select {
-#     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-#     RPS2=$RPS1
-#     zle reset-prompt
-# }
-# 
-# zle -N zle-line-init
-# zle -N zle-keymap-select
-# export KEYTIMEOUT=1
-#
-# New bind keys
-INSERT_MODE_INDICATOR="%F{yellow}+%f"
-NORMAL_MODE_INDICATOR="%F{green}*%f"
+# this doesn't seem to be working 
 bindkey -M viins 'jk' vi-cmd-mode
 
-# my environment variables
-export LESS="-F -E -X $LESS"
+# don't turn off autopushd 
+# unsetopt autopushd
+# unsetopt inc_append_history
+# unsetopt share_history
 
-# turn off autopushd so that we use the dir stack manually
-unsetopt autopushd
-#unsetopt inc_append_history
-#unsetopt share_history
-
-# story history in a file
-HISTFILE=$HOME/.zhistory
-export HISTSIZE=10000
-export SAVEHIST=10000
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_verify
-setopt inc_append_history
-setopt inc_append_history_time
-
-function gitchangelog() {
-  if [[ -n $1 ]] ; then
-    git log --grep="Merge branch" $1..HEAD
-  else
-    echo "Requires commit hash as argument"
-  fi
-}
-
-function fif() {
-  if [[ -n $1 && -n $2 ]] ; then
-    find . -name $1 -exec grep -Hin $2 {} \;
-  else
-    echo "Requires 2 patterns as arguments"
-  fi
-}
-
-function rmd() {
-  pandoc $1 | lynx -stdin
-}
-
-function reapdockerimages() {
-  docker rm $(docker ps -qa --no-trunc --filter "status=exited")
-  docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
-  docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
-}
-
-function list-unmerged {
-  git ls-files --unmerged | cut -f2 | sort -u ;
-}
-
-# List opencode processes with port + cwd
-list-opencodes() {
-  local pids port cwd start
-  pids=($(pgrep -f "opencode.*--port" 2>/dev/null))
-  (( ${#pids[@]} )) || { echo "No opencode --port processes"; return; }
-  for pid in "${pids[@]}"; do
-    port=$(lsof -w -iTCP -sTCP:LISTEN -P -n -a -p "$pid" 2>/dev/null | awk 'NR>1{split($9,a,":");print a[length(a)]; exit}')
-    cwd=$(lsof -p "$pid" 2>/dev/null | awk '$4=="cwd"{print $9; exit}')
-    start=$(ps -o lstart= -p "$pid")
-    printf "%-6s port=%-6s cwd=%-50s start=%s\n" "$pid" "${port:-?}" "${cwd:-?}" "$start"
-  done
-}
-
-# 2) Check if a WezTerm pane still references it (fast heuristic: pane CWD match)
-list-wezterm-panes() {
-  wezterm cli list --format json 2>/dev/null | jq -r '.[] | "\(.pane_id)\t\(.cwd)\t\(.title)"'
-}
-
-
+#
 # shorthand for cryptic names
+#
 export SHFCNMYPTEST="E2PI9QSGISSB91"
 export SHFCNMYPPROD="E28PRN526W4NUH"
 export SHFCNMYPSTAGING="E1Q2GCQ7PBOPZW"
@@ -190,6 +107,10 @@ export SHFCNPRODUSERPOOL="us-east-1_FJFi3AIyn"
 export SHFCNDEVUSERPOOL="us-east-1_OXXptQxZt"
 export SHFCNPRODUSERPOOLUAE="me-central-1_eLjP0HgCk"
 export SHFCNDEVUSERPOOLUAE="me-central-1_KlULBcnaV"
+
+# 
+# zsh convenience functions
+#
 
 # function for using different configurations of neovim
 vv() {
@@ -231,26 +152,73 @@ function update_node_path() {
   export PATH
 }
 
+function gitchangelog() {
+  if [[ -n $1 ]] ; then
+    git log --grep="Merge branch" $1..HEAD
+  else
+    echo "Requires commit hash as argument"
+  fi
+}
 
+function fif() {
+  if [[ -n $1 && -n $2 ]] ; then
+    find . -name $1 -exec grep -Hin $2 {} \;
+  else
+    echo "Requires 2 patterns as arguments"
+  fi
+}
 
-###########################
+function rmd() {
+  pandoc $1 | lynx -stdin
+}
+
+function reapdockerimages() {
+  docker rm $(docker ps -qa --no-trunc --filter "status=exited")
+  docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
+  docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+}
+
+function list-unmerged {
+  git ls-files --unmerged | cut -f2 | sort -u ;
+}
+
+# (1) list opencode processes with port + cwd
+list-opencodes() {
+  local pids port cwd start
+  pids=($(pgrep -f "opencode.*--port" 2>/dev/null))
+  (( ${#pids[@]} )) || { echo "No opencode --port processes"; return; }
+  for pid in "${pids[@]}"; do
+    port=$(lsof -w -iTCP -sTCP:LISTEN -P -n -a -p "$pid" 2>/dev/null | awk 'NR>1{split($9,a,":");print a[length(a)]; exit}')
+    cwd=$(lsof -p "$pid" 2>/dev/null | awk '$4=="cwd"{print $9; exit}')
+    start=$(ps -o lstart= -p "$pid")
+    printf "%-6s port=%-6s cwd=%-50s start=%s\n" "$pid" "${port:-?}" "${cwd:-?}" "$start"
+  done
+}
+
+# (2) check if a WezTerm pane still references it (fast heuristic: pane CWD match)
+list-wezterm-panes() {
+  wezterm cli list --format json 2>/dev/null | jq -r '.[] | "\(.pane_id)\t\(.cwd)\t\(.title)"'
+}
+
+##########################################################################
 # 
 # intialize tools and utilities
 #
-###########################
+##########################################################################
 
-#######
+# configure LESS options
+export LESS="-F -E -X $LESS"
+
 # autocomplete configuration
-#######
 source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Case-insensitive completion# Load plugins
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-#####
-##### Platform-specific changes
-#####
+#
+# Platform-specific changes
+#
 if [[ $(uname) =~ ^(Darwin|Linux)$ ]]; then
   ### FZF stuff
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -260,10 +228,11 @@ if [[ $(uname) =~ ^(Darwin|Linux)$ ]]; then
 fi
 
 # fzf configuration
-source <(fzf --zsh)
+eval "$(fzf --zsh)"
 
 # pyenv initialization
 eval "$(pyenv init -)"
+
 # requires higher limit on file handles for model training in python
 ulimit -n 10240
 
@@ -304,16 +273,4 @@ update_node_path  # Run on shell startup
 if [[ -d "$HOME/.deno/bin" ]]; then
   export DENO_INSTALL="/Users/clinton/.deno"
   export PATH="$DENO_INSTALL/bin:$PATH"
-fi
-
-###
-# Linux-specific setup
-###
-if [[ "$(uname)" == "Linux" ]]; then
-    # Your Linux/Zorin-specific commands here
-    echo Setting up brew path
-    alias update="sudo apt update && sudo apt upgrade"
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-    export WAYLAND_DISPLAY=
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
