@@ -12,6 +12,7 @@ if [[ "$(uname)" == "Linux" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
     export WAYLAND_DISPLAY=
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH'
 fi
 
 #################################################################
@@ -46,7 +47,7 @@ alias edit-unmerged="list-unmerged | xargs vim"
 # plain mode without plugins
 alias vi="nvim -u NONE"
 alias l='eza -l --icons --git -a'
-alias lw='eza -G'
+alias lw='eza -G --icons -a'
 alias lt="eza --tree --level=2 --long --icons --git"
 alias la='eza -lah'
 alias lu='eza -lruh'
@@ -245,6 +246,12 @@ eval "$(starship init zsh)"
 
 # atuin set up
 eval "$(atuin init zsh)" 
+
+# carapace for argument completion
+autoload -U compinit && compinit
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
 
 {{ if (and (eq .chezmoi.arch "arm64") (eq .chezmoi.os "darwin")) }}
 # NVM path setup on a per operating system and architecture basis
