@@ -10,7 +10,6 @@ if [[ "$(uname)" == "Linux" ]]; then
     echo Setting up brew path
     alias update="sudo apt update && sudo apt upgrade"
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-    export WAYLAND_DISPLAY=
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH"
 fi

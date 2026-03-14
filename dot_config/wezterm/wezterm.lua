@@ -4,8 +4,15 @@ local mux = wezterm.mux
 local config = wezterm.config_builder()
 local act = wezterm.action
 
-if wezterm.target_triple:find('linux') then
-  config.enable_wayland = false
+local is_linux = wezterm.target_triple:find("linux") ~= nil
+local hostname = wezterm.hostname()
+
+-- Replace with your actual Zorin hostname
+local is_zorin = is_linux and (hostname == "clinton-macbook")
+
+if is_zorin then
+  -- Force X11 instead of Wayland for this host
+  config.enable_wayland = false  -- default is true, but we override here[web:8]
 end
 
 config.debug_key_events = true
