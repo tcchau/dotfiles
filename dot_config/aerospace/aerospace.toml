@@ -89,7 +89,7 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
 [[on-window-detected]]
 # This section allows you to run commands when a window is detected.
   if.app-id = 'com.DanPristupov.Fork'
-  run = ['layout tiling']
+  run = ['move-node-to-workspace W']
 
 [[on-window-detected]]
   if.app-id = 'com.unity3d.UnityEditor5.x'
@@ -149,7 +149,7 @@ A = ['^built-in retina display$', 'secondary', 'LU28R55']
 
 [[on-window-detected]]
   if.window-title-regex-substring = 'Unity'
-  run = 'layout tiling'
+  run = ['move-node-to-workspace U']
 
 [[on-window-detected]]
   if.app-id = 'com.microsoft.edgemac'
