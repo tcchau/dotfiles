@@ -35,12 +35,15 @@ export LANG=en_US.UTF-8
 #
 # aliases
 #
-alias rmnpmd="find . -name 'npm-debug*' -exec rm {} \;"
 alias gitprunelocal="git branch --merged master | grep -v '\* master' | xargs -n 1 git branch -d"
 alias gitpruneremote="git remote prune origin"
 alias sls="../mysls.sh"
 alias gitlastlog="git log -1 --pretty=%B"
 alias add-unmerged="list-unmerged | xargs git add"
+alias gco="git checkout"
+alias gst="git status"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias gdiff="git diff"
 
 alias edit-unmerged="list-unmerged | xargs vim"
 # plain mode without plugins
