@@ -216,9 +216,6 @@ export LESS="-F -E -X $LESS"
 source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ${ZSH_CUSTOM:-~/.zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Case-insensitive completion# Load plugins
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
 #
 # Platform-specific changes
 #
@@ -250,9 +247,21 @@ eval "$(starship init zsh)"
 eval "$(atuin init zsh)" 
 
 # carapace for argument completion
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+#zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+#zstyle ':completion:*' menu select
+# This enables the interactive completion menu where you can navigate candidates with arrow keys after pressing Tab.
+zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# For vim-style navigation (hjkl), also add:
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+# load carapace completion
 source <(carapace _carapace)
 
 {{ if (and (eq .chezmoi.arch "arm64") (eq .chezmoi.os "darwin")) }}
@@ -283,3 +292,6 @@ if [[ -d "$HOME/.deno/bin" ]]; then
   export DENO_INSTALL="/Users/clinton/.deno"
   export PATH="$DENO_INSTALL/bin:$PATH"
 fi
+
+# install worktrunk
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
