@@ -9,9 +9,11 @@ if [[ "$(uname)" == "Linux" ]]; then
     # Your Linux/Zorin-specific commands here
     echo Setting up brew path
     alias update="sudo apt update && sudo apt upgrade"
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH"
+elif [[ "$(uname)" == "Darwin" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 #################################################################
@@ -76,7 +78,7 @@ alias gupusdev="USER_REGION=us STAGE=dev ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2
 
 # path configurations
 
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -246,23 +248,26 @@ eval "$(starship init zsh)"
 # atuin set up
 eval "$(atuin init zsh)" 
 
-# carapace for argument completion
+# completion system
 autoload -Uz compinit && compinit
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-#zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-#zstyle ':completion:*' menu select
-# This enables the interactive completion menu where you can navigate candidates with arrow keys after pressing Tab.
-zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-# For vim-style navigation (hjkl), also add:
 zmodload zsh/complist
+#zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+# arrow-key menu selection on first Tab
+zstyle ':completion:*' menu select=1
+# case-insensitive matching
+zstyle ':completion:*' matcher-list \
+  'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+  'r:|[._-]=* r:|=*' \
+  'l:|=* r:|=*'
+# vim keys in completion menu
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
-
-# load carapace completion
+# carapace
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 source <(carapace _carapace)
+unsetopt MENU_COMPLETE
 
 {{ if (and (eq .chezmoi.arch "arm64") (eq .chezmoi.os "darwin")) }}
 # NVM path setup on a per operating system and architecture basis
