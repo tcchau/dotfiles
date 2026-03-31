@@ -1,7 +1,8 @@
 [core]
 	editor = vim
 	excludesfile = /Users/clinton/.gitignore_global
-
+	pager = less -FRX
+	
 [include]
   path = .gitconfig_host_specific
 
