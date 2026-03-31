@@ -11,8 +11,8 @@ local hostname = wezterm.hostname()
 local is_zorin = is_linux and (hostname == "clinton-macbook")
 
 if is_zorin then
-  -- Force X11 instead of Wayland for this host
-  config.enable_wayland = false  -- default is true, but we override here[web:8]
+	-- Force X11 instead of Wayland for this host
+	config.enable_wayland = false -- default is true, but we override here[web:8]
 end
 
 config.debug_key_events = true
@@ -20,15 +20,19 @@ config.debug_key_events = true
 -- config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
 config.font_size = 15
 
-function scheme_for_appearance(appearance)
-  if appearance:find "Dark" then
-    return "Catppuccin Mocha"
-  else
-    return "Catppuccin Latte"
-  end
+local function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		return "Catppuccin Mocha"
+	else
+		return "Catppuccin Latte"
+	end
 end
 
-config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+if wezterm.gui then
+	config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+else
+	config.color_scheme = "Catppuccin Mocha"
+end
 
 config.leader = {
 	key = "\\",
@@ -207,6 +211,7 @@ local opacity = 0.9
 
 wezterm.on("window-focus-changed", function(window, _pane)
 	local overrides = window:get_config_overrides() or {}
+	overrides.color_scheme = scheme_for_appearance(window:get_appearance())
 
 	if window:is_focused() then
 		overrides.window_background_opacity = 1
