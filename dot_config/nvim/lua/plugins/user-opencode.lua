@@ -28,8 +28,8 @@ return {
     ---@type opencode.Opts
     vim.g.opencode_opts = {
       provider = {
-        enabled = "wezterm",
-        wezterm = {
+        enabled = "tmux",
+        tmux = {
           direction = "right",
           percent = 40,
         },
