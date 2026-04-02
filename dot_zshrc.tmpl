@@ -47,6 +47,9 @@ alias gst="git status"
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 alias gdiff="git diff"
 
+# worktrunk aliases
+alias wtmerge='wt merge --no-squash --no-remove'
+
 alias edit-unmerged="list-unmerged | xargs vim"
 # plain mode without plugins
 alias vi="nvim -u NONE"
@@ -60,11 +63,15 @@ alias lap='eza -lAh --color=always | less -R --clear-screen --quit-if-one-screen
 alias lup='eza -lruh --color=always | less -R --clear-screen --quit-if-one-screen'
 alias jtags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
 alias uuidgen='uuidgen | tr "[:upper:]" "[:lower:]"'
+
+# chezmoi aliases
 alias cmadd='chezmoi add'
 alias cmreadd='chezmoi re-add'
 alias cme='chezmoi edit'
 alias cmea='chezmoi edit --apply'
 alias cma='chezmoi apply'
+
+# aws-utilities Peekapak stuff
 alias gupuae="USER_REGION=uae STAGE=prod ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2Ru9sKP2j3HhKhG/GsD3/nK8TYm8=' tsx user-ops/getUserProfile2.ts --production "
 alias gupus="USER_REGION=us STAGE=prod ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2Ru9sKP2j3HhKhG/GsD3/nK8TYm8=' tsx user-ops/getUserProfile2.ts --production "
 alias gupuaedev="USER_REGION=uae STAGE=dev ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2Ru9sKP2j3HhKhG/GsD3/nK8TYm8=' tsx user-ops/getUserProfile2.ts "
@@ -78,7 +85,8 @@ alias gupusdev="USER_REGION=us STAGE=dev ENCRYPTION_PASSPHRASE='2ChADVW9451qb/r2
 
 # path configurations
 
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$PATH:/Users/clinton/.lmstudio/bin"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
