@@ -15,6 +15,7 @@ if is_zorin then
 	config.enable_wayland = false -- default is true, but we override here[web:8]
 end
 
+config.hide_tab_bar_if_only_one_tab = true
 config.debug_key_events = true
 
 -- config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
