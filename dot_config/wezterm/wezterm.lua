@@ -37,7 +37,7 @@ end
 
 config.leader = {
 	key = "\\",
-	mods = "CTRL",
+	mods = "CTRL|META",
 	timeout_milliseconds = 2000,
 }
 

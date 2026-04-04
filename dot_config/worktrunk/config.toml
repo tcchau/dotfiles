@@ -1,5 +1,6 @@
-skip-commit-generation-prompt = true
-[commit]
-use_ai = false
 
 [projects]
+
+[post-create]
+deps = "[ -f package.json ] && npm install --legacy-peer-deps || true"
+submodules = "[ -f .gitmodules ] && git submodule update --init --recursive || true"
