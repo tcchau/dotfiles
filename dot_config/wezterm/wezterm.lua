@@ -182,6 +182,18 @@ for i = 1, 9 do
 	})
 end
 
+table.insert(config.keys, {
+	key = "Tab",
+	mods = "CTRL",
+	action = act.SendKey({ key = "Tab", mods = "CTRL" }),
+})
+
+table.insert(config.keys, {
+	key = "Tab",
+	mods = "CTRL|SHIFT",
+	action = act.SendKey({ key = "Tab", mods = "CTRL|SHIFT" }),
+})
+
 -- Make it look like tabs, with better GUI controls
 config.use_fancy_tab_bar = true
 
