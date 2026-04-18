@@ -18,7 +18,7 @@ end
 config.hide_tab_bar_if_only_one_tab = true
 config.debug_key_events = true
 
--- config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
+config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 config.font_size = 15
 
 local function scheme_for_appearance(appearance)
@@ -191,7 +191,13 @@ table.insert(config.keys, {
 table.insert(config.keys, {
 	key = "Tab",
 	mods = "CTRL|SHIFT",
-	action = act.SendKey({ key = "Tab", mods = "CTRL|SHIFT" }),
+	action = act.SendString("\x1b[Z"),
+})
+
+table.insert(config.keys, {
+	key = "Enter",
+	mods = "SHIFT",
+	action = wezterm.action.SendKey({ key = "j", mods = "CTRL" }),
 })
 
 -- Make it look like tabs, with better GUI controls
