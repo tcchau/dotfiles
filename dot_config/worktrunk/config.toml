@@ -1,7 +1,2 @@
 skip-commit-generation-prompt = true
 
-[projects]
-
-[pre-start]
-deps = "[ -f package.json ] && npm install --legacy-peer-deps || true"
-submodules = "[ -f .gitmodules ] && git submodule update --init --recursive || true"
